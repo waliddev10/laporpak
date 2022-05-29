@@ -17,6 +17,7 @@ use App\Http\Controllers\Pengaturan\PaymentPointController;
 use App\Http\Controllers\Pengaturan\PenandatanganController;
 use App\Http\Controllers\Pengaturan\UserController;
 use App\Http\Controllers\Pengaturan\WilayahController;
+use App\Models\PaymentPoint;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -57,7 +58,8 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('pages.dashboard');
+        $payment_point = PaymentPoint::all();
+        return view('pages.dashboard', compact('payment_point'));
     })->name('dashboard');
 
     Route::prefix('/pengaturan')->group(function () {
