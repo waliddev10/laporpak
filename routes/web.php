@@ -59,7 +59,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $payment_point = PaymentPoint::all();
-        return view('pages.dashboard', compact('payment_point'));
+        return view('pages.dashboard', ['payment_point' => $payment_point]);
     })->name('dashboard');
 
     Route::prefix('/pengaturan')->group(function () {
