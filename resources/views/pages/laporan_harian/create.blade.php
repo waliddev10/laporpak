@@ -83,20 +83,20 @@
                     <strong>Nilai PKB</strong>
                 </div>
                 <div class="form-group">
-                    <label class="font-weight-semibold">Pokok</label>
+                    <label class="font-weight-semibold">Pokok <span class="badge badge-secondary">Rp.</span></label>
                     <input type="number" name="nilai_pokok" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label class="font-weight-semibold">Denda</label>
+                    <label class="font-weight-semibold">Denda <span class="badge badge-secondary">Rp.</span></label>
                     <input type="number" name="nilai_denda" class="form-control" />
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="form-group row text-right">
-        <div class="col-12">
-            <button type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i> Laporkan</button>
+            <div class="form-group mt-5 row text-right">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i> Laporkan</button>
+                </div>
+            </div>
         </div>
     </div>
 

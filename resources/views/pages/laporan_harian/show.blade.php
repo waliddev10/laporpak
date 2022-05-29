@@ -22,21 +22,21 @@
                 <thead>
                     <tr>
                         <th rowspan="2"></th>
-                        <th rowspan="2">No.</th>
-                        <th rowspan="2">Jenis PKB</th>
-                        <th colspan="2">Tanggal</th>
-                        <th rowspan="2">No. SKPD</th>
-                        <th rowspan="2">No. Polisi</th>
-                        <th colspan="2">Jumlah</th>
-                        <th colspan="2">Wilayah</th>
+                        <th rowspan="2" class="text-center">No.</th>
+                        <th rowspan="2" class="text-center">Jenis PKB</th>
+                        <th colspan="2" class="text-center">Tanggal</th>
+                        <th rowspan="2" class="text-center">No. SKPD</th>
+                        <th rowspan="2" class="text-center">No. Polisi</th>
+                        <th colspan="2" class="text-center">Jumlah</th>
+                        <th colspan="2" class="text-center">Wilayah</th>
                     </tr>
                     <tr>
-                        <th>Cetak</th>
-                        <th>Bayar</th>
-                        <th>Pokok</th>
-                        <th>Denda</th>
-                        <th>Kota</th>
-                        <th>Jenis Kasir</th>
+                        <th class="text-center">Cetak</th>
+                        <th class="text-center">Bayar</th>
+                        <th class="text-center">Pokok</th>
+                        <th class="text-center">Denda</th>
+                        <th class="text-center">Kota</th>
+                        <th class="text-center">Jenis Kasir</th>
                     </tr>
                 </thead>
             </table>
