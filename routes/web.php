@@ -1,15 +1,6 @@
 <?php
 
-use App\Http\Controllers\Database\MasaPajakController;
-use App\Http\Controllers\Database\PerusahaanController;
-use App\Http\Controllers\Database\TanggalLiburController;
-use App\Http\Controllers\Ketentuan\CaraPelaporanController;
-use App\Http\Controllers\Ketentuan\JenisUsahaController;
-use App\Http\Controllers\Ketentuan\NpaController;
-use App\Http\Controllers\Ketentuan\SanksiAdministrasiController;
-use App\Http\Controllers\Ketentuan\SanksiBungaController;
-use App\Http\Controllers\Ketentuan\TarifPajakController;
-use App\Http\Controllers\Penatausahaan\PelaporanController;
+use App\Http\Controllers\LaporanHarianController;
 use App\Http\Controllers\Pengaturan\JenisPkbController;
 use App\Http\Controllers\Pengaturan\KasirController;
 use App\Http\Controllers\Pengaturan\KotaPenandatanganController;
@@ -52,7 +43,6 @@ Route::get('/symlink', function () {
 // router
 
 Route::get('/', function () {
-    // return view('welcome');
     return redirect()->route('dashboard');
 });
 
@@ -62,36 +52,31 @@ Route::middleware(['auth'])->group(function () {
         return view('pages.dashboard', ['payment_point' => $payment_point]);
     })->name('dashboard');
 
+    Route::prefix('/laporan_harian')->group(function () {
+        Route::get('/', [LaporanHarianController::class, 'index'])
+            ->name('laporan_harian.index');
+        Route::get('/payment_point/{payment_point}', [LaporanHarianController::class, 'show'])
+            ->name('laporan_harian.show');
+        Route::get('/payment_point/{payment_point}/{jenis_pkb}/create', [LaporanHarianController::class, 'create'])
+            ->name('laporan_harian.create');
+        Route::post('/payment_point/{payment_point}', [LaporanHarianController::class, 'store'])
+            ->name('laporan_harian.store');
+        Route::put('/payment_point/{payment_point}/{esamsat}', [LaporanHarianController::class, 'edit'])
+            ->name('laporan_harian.update');
+        Route::put('/payment_point/{payment_point}/{esamsat}', [LaporanHarianController::class, 'update'])
+            ->name('laporan_harian.update');
+        Route::delete('/payment_point/{payment_point}/{esamsat}', [LaporanHarianController::class, 'destroy'])
+            ->name('laporan_harian.destroy');
+    });
+
     Route::prefix('/pengaturan')->group(function () {
-        Route::resource('/jenis_pkb', JenisPkbController::class);
-        Route::resource('/wilayah', WilayahController::class);
-        Route::resource('/kasir', KasirController::class);
-        Route::resource('/payment_point', PaymentPointController::class);
-        Route::resource('/penandatangan', PenandatanganController::class);
-        Route::resource('/kota_penandatangan', KotaPenandatanganController::class);
-        Route::resource('/user', UserController::class);
-    });
-
-    Route::prefix('/penatausahaan')->group(function () {
-        Route::resource('/pelaporan', PelaporanController::class);
-        Route::get('/cetak-pelaporan/{pelaporan}', [PelaporanController::class, 'print'])
-            ->name('pelaporan.cetak-surat');
-        Route::get('/berkas-pelaporan/{filename}', [PelaporanController::class, 'showFile'])
-            ->name('pelaporan.berkas');
-    });
-
-    Route::prefix('/database')->group(function () {
-        Route::resource('/tanggal-libur', TanggalLiburController::class);
-        Route::resource('/masa-pajak', MasaPajakController::class);
-        Route::resource('/perusahaan', PerusahaanController::class);
-    });
-    Route::prefix('/ketentuan')->group(function () {
-        Route::resource('/jenis-usaha', JenisUsahaController::class);
-        Route::resource('/cara-pelaporan', CaraPelaporanController::class);
-        Route::resource('/tarif-pajak', TarifPajakController::class);
-        Route::resource('/npa', NpaController::class);
-        Route::resource('/sanksi-administrasi', SanksiAdministrasiController::class);
-        Route::resource('/sanksi-bunga', SanksiBungaController::class);
+        Route::resource('/jenis_pkb', JenisPkbController::class)->except('show');
+        Route::resource('/wilayah', WilayahController::class)->except('show');
+        Route::resource('/kasir', KasirController::class)->except('show');
+        Route::resource('/payment_point', PaymentPointController::class)->except('show');
+        Route::resource('/penandatangan', PenandatanganController::class)->except('show');
+        Route::resource('/kota_penandatangan', KotaPenandatanganController::class)->except('show');
+        Route::resource('/user', UserController::class)->except('show');
     });
 });
 

@@ -12,7 +12,7 @@ $menu = collect([
 (object) [
 'title' => 'Laporan Harian',
 'icon' => 'fas fa-fw fa-file-alt',
-'route' => 'dashboard',
+'route' => 'laporan_harian.index',
 'submenu' => null
 ],
 # --- menu 1 --- #
@@ -25,13 +25,13 @@ $menu = collect([
 ## --- submenu 3.2 --- #
 (object) [
 'title' => 'E-Samsat',
-'route' => 'pelaporan.index'
+'route' => 'dashboard'
 ],
 ## --- submenu 3.2 --- #
 ## --- submenu 3.2 --- #
 (object) [
 'title' => 'SKPD',
-'route' => 'pelaporan.index'
+'route' => 'dashboard'
 ],
 ## --- submenu 3.2 --- #
 ]
@@ -43,30 +43,6 @@ $menu = collect([
 'icon' => 'fas fa-fw fa-wrench',
 'route' => null,
 'submenu' => [
-## --- submenu 3.2 --- #
-(object) [
-'title' => 'Klasifikasi',
-'route' => null
-],
-## --- submenu 3.1 --- #
-## --- submenu 3.2 --- #
-(object) [
-'title' => 'Jenis PKB',
-'route' => 'jenis_pkb.index'
-],
-## --- submenu 3.2 --- #
-## --- submenu 3.2 --- #
-(object) [
-'title' => 'Wilayah',
-'route' => 'wilayah.index'
-],
-## --- submenu 3.2 --- #
-## --- submenu 3.2 --- #
-(object) [
-'title' => 'Kasir',
-'route' => 'kasir.index'
-],
-## --- submenu 3.2 --- #
 ## --- submenu 3.2 --- #
 (object) [
 'title' => 'Aplikasi',
@@ -97,6 +73,30 @@ $menu = collect([
 'route' => 'user.index'
 ],
 ## --- submenu 3.2 --- #
+## --- submenu 3.2 --- #
+(object) [
+'title' => 'Klasifikasi',
+'route' => null
+],
+## --- submenu 3.1 --- #
+## --- submenu 3.2 --- #
+(object) [
+'title' => 'Jenis PKB',
+'route' => 'jenis_pkb.index'
+],
+## --- submenu 3.2 --- #
+## --- submenu 3.2 --- #
+(object) [
+'title' => 'Wilayah',
+'route' => 'wilayah.index'
+],
+## --- submenu 3.2 --- #
+## --- submenu 3.2 --- #
+(object) [
+'title' => 'Kasir',
+'route' => 'kasir.index'
+],
+## --- submenu 3.2 --- #
 ]
 ],
 # --- menu 2 --- #
@@ -104,7 +104,7 @@ $menu = collect([
 @endphp
 
 <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="sidebar">
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center mb-3" href="{{ route('dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <img class="d-block" src={{ asset('assets/img/logo.png') }} height="64" />
         </div>

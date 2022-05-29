@@ -22,4 +22,19 @@ class Esamsat extends Model
         'wilayah_id',
         'kasir_id'
     ];
+
+    public function jenis_pkb()
+    {
+        return $this->belongsTo(JenisPkb::class);
+    }
+
+    public function wilayah()
+    {
+        return $this->belongsTo(Wilayah::class);
+    }
+
+    public function kasir()
+    {
+        return $this->belongsTo(Kasir::class);
+    }
 }
