@@ -18,10 +18,16 @@ $menu = collect([
 # --- menu 1 --- #
 # --- menu 3 --- #
 (object) [
-'title' => 'Cetak Laporan',
+'title' => 'Laporan Bulanan',
 'icon' => 'fas fa-fw fa-print',
 'route' => null,
 'submenu' => [
+## --- submenu 3.2 --- #
+(object) [
+'title' => 'Cetak',
+'route' => null
+],
+## --- submenu 3.1 --- #
 ## --- submenu 3.2 --- #
 (object) [
 'title' => 'E-Samsat',

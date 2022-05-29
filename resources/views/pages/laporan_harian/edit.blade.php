@@ -111,7 +111,7 @@
 
             <div class="form-group mt-5 row text-right">
                 <div class="col-12">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i> Laporkan</button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
                 </div>
             </div>
         </div>
