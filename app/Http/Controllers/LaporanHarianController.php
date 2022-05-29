@@ -27,10 +27,6 @@ class LaporanHarianController extends Controller
                     return '<div class="btn-group">
                     <a class="btn btn-xs btn-success" href="' . route('laporan_harian.show', $item->id) . '"><i class="fas fa-eye fa-fw"></i></a>
                     </div>';
-                    // return '<div class="btn-group">
-                    // <button class="btn btn-xs btn-info" title="Ubah" data-toggle="modal" data-target="#modalContainer" data-title="Ubah" href="' . route('payment_point.edit', $item->id) . '"><i class="fas fa-edit fa-fw"></i></button>
-                    // <button href="' . route('payment_point.destroy', $item->id) . '" class="btn btn-xs btn-danger delete" data-target-table="tableDokumen"><i class="fa fa-trash"></i></button>
-                    // </div>';
                 })
                 ->rawColumns(['action'])
                 ->addIndexColumn()
@@ -112,9 +108,7 @@ class LaporanHarianController extends Controller
         if ($request->ajax()) {
             return DataTables::of(Esamsat::with(['jenis_pkb', 'wilayah', 'kasir'])->where('payment_point_id', $payment_point->id)->get())
                 ->addColumn('action', function ($item) use ($payment_point) {
-                    // return '<div class="btn-group">
-                    // <button class="btn btn-xs btn-info" title="Ubah" data-toggle="modal" data-target="#modalContainer" data-title="Ubah" href="' . /* route('esamsat.edit', $item->id) . */ '"><i class="fas fa-edit fa-fw"></i></button>
-                    return '<button href="' . route('laporan_harian.destroy', ['payment_point' => $payment_point->id, 'esamsat' => $item->id]) . '" class="btn btn-xs btn-danger delete" data-target-table="tableDokumen"><i class="fa fa-trash"></i></button>
+                    return '<div class="btn-group"><button class="btn btn-xs btn-warning" title="Ubah" data-toggle="modal" data-target="#modalContainer" data-title="Ubah" href="' .  route('laporan_harian.edit', ['payment_point' => $payment_point->id, 'esamsat' => $item->id]) . '"><i class="fas fa-edit fa-fw"></i></button><button href="' . route('laporan_harian.destroy', ['payment_point' => $payment_point->id, 'esamsat' => $item->id]) . '" class="btn btn-xs btn-danger delete" data-target-table="tableDokumen"><i class="fa fa-trash"></i></button>
                     </div>';
                 })
                 ->addColumn('no_pol_lengkap', function ($item) {
@@ -150,9 +144,19 @@ class LaporanHarianController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Esamsat $esamsat)
+    public function edit(PaymentPoint $payment_point, Esamsat $esamsat)
     {
-        return view('pages.laporan_harian.edit', ['item' => $esamsat]);
+        $wilayah = Wilayah::all();
+        $kasir = Kasir::all();
+        $jenis_pkb = JenisPkb::all();
+
+        return view('pages.laporan_harian.edit', [
+            'item' => $esamsat,
+            'jenis_pkb' => $jenis_pkb,
+            'payment_point' => $payment_point,
+            'wilayah' => $wilayah,
+            'kasir' => $kasir,
+        ]);
     }
 
     /**
@@ -162,15 +166,35 @@ class LaporanHarianController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $payment_point, $esamsat)
     {
         $this->validate($request, [
-            'nama' => 'required|string'
+            'jenis_pkb_id' => 'required',
+            'tgl_cetak' => 'required',
+            'tgl_bayar' => 'required',
+            'no_skpd' => 'required',
+            'awalan_no_pol' => 'required',
+            'no_pol' => 'required',
+            'akhiran_no_pol' => 'required',
+            'nilai_pokok' => 'required',
+            'nilai_denda' => 'required',
+            'wilayah_id' => 'required',
+            'kasir_id' => 'required'
         ]);
 
-        $data = Esamsat::findOrFail($id);
+        $data = Esamsat::findOrFail($esamsat);
         $data->update($request->only([
-            'nama'
+            'jenis_pkb_id',
+            'tgl_cetak',
+            'tgl_bayar',
+            'no_skpd',
+            'awalan_no_pol',
+            'no_pol',
+            'akhiran_no_pol',
+            'nilai_pokok',
+            'nilai_denda',
+            'wilayah_id',
+            'kasir_id'
         ]));
 
         return response()->json([

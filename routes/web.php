@@ -61,8 +61,8 @@ Route::middleware(['auth'])->group(function () {
             ->name('laporan_harian.create');
         Route::post('/payment_point/{payment_point}', [LaporanHarianController::class, 'store'])
             ->name('laporan_harian.store');
-        Route::put('/payment_point/{payment_point}/{esamsat}', [LaporanHarianController::class, 'edit'])
-            ->name('laporan_harian.update');
+        Route::get('/payment_point/{payment_point}/{esamsat}', [LaporanHarianController::class, 'edit'])
+            ->name('laporan_harian.edit');
         Route::put('/payment_point/{payment_point}/{esamsat}', [LaporanHarianController::class, 'update'])
             ->name('laporan_harian.update');
         Route::delete('/payment_point/{payment_point}/{esamsat}', [LaporanHarianController::class, 'destroy'])

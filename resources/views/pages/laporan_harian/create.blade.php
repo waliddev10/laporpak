@@ -11,7 +11,7 @@
                 </div>
                 <div class="form-group">
                     <label class="font-weight-semibold">Tanggal Bayar</label>
-                    <input type="date" name="tgl_cetak" class="form-control" />
+                    <input type="date" name="tgl_bayar" class="form-control" />
                 </div>
                 <div class="form-group">
                     <label class="font-weight-semibold">No. Polisi</label>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group">
                     <label class="font-weight-semibold">Tanggal Cetak</label>
-                    <input type="date" name="tgl_bayar" class="form-control" />
+                    <input type="date" name="tgl_cetak" class="form-control" />
                 </div>
                 <div class="form-group">
                     <label class="font-weight-semibold">No. SKPD</label>
