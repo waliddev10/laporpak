@@ -47,7 +47,7 @@
             <td style="border: 0.5pt solid black; text-align: center;">{{ $d->no_skpd }}</td>
             <td style="border: 0.5pt solid black; text-align: center;">{{ $d->awalan_no_pol }} {{ $d->no_pol }} {{
                 $d->akhiran_no_pol }}</td>
-            <td style="border: 0.5pt solid black; text-align: center;">{{ $d->kasir_pembayaran->nama }}</td>
+            <td style="border: 0.5pt solid black; text-align: center;">{{ Str::upper($d->kasir_pembayaran->nama) }}</td>
             <td style="border: 0.5pt solid black;">
                 <span style="float: left;">Rp</span>
                 <span style="float: right;">{{ number_format($d->nilai_pokok, 0, ',', '.') }}</span>
