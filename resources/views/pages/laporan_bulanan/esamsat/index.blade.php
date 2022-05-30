@@ -8,7 +8,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Laporan Bulanan E-Samsat</h6>
     </div>
     <div class="card-body">
-        <form id="printForm" action="{{ route('laporan_bulanan_esamsat.print') }}" accept-charset="UTF-8"
+        <form method="POST" action="{{ route('laporan_bulanan_esamsat.print') }}" accept-charset="UTF-8"
             class="form needs-validation" autocomplete="off">
             @csrf
             <div class="border p-3 my-2 shadow">
@@ -126,31 +126,3 @@
     </div>
 </div>
 @endsection
-
-@push('scripts')
-<script type="text/javascript">
-    $("#printForm").on('submit', function(event) {
-        event.preventDefault();
-        var form = $(this);
-        var formData = new FormData($(this)[0]);
-        
-        $.ajax({
-            url: form.attr('action'),
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            xhrFields:{
-                responseType: 'blob'
-            },
-            success: function(data) {
-                var blobData = data;
-                var url = window.URL || window.webkitURL;
-                var src = url.createObjectURL(data);
-                window.open(src, 'Cetak PDF', 'resizable=no,width=1024,height=768');
-        }
-    });
-    return false;
-});
-</script>
-@endpush
