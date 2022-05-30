@@ -38,7 +38,7 @@
             <th style="border: 0.5pt solid black; width: 13%;">DENDA</th>
             <th style="border: 0.5pt solid black; width: 13%;">JUMLAH</th>
         </tr>
-        @foreach ($data as $d)
+        @forelse ($data as $d)
         <tr>
             <td style="border: 0.5pt solid black; text-align: center;">{{ $loop->iteration }}</td>
             <td style="border: 0.5pt solid black; text-align: center;">{{
@@ -65,7 +65,13 @@
                 <div style="clear: both;"></div>
             </td>
         </tr>
-        @endforeach
+        @empty
+        <tr>
+            <td colspan="9" style="border: 0.5pt solid black; text-align: center; font-style: italic;">
+                -- Nihil --
+            </td>
+        </tr>
+        @endforelse
     </table>
 
     <table style="width: 100%; border-collapse: collapse;">

@@ -8,7 +8,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Laporan Bulanan E-Samsat</h6>
     </div>
     <div class="card-body">
-        <form method="POST" action="{{ route('laporan_bulanan_esamsat.print') }}" accept-charset="UTF-8"
+        <form id="printForm" action="{{ route('laporan_bulanan_esamsat.print') }}" accept-charset="UTF-8"
             class="form needs-validation" autocomplete="off">
             @csrf
             <div class="border p-3 my-2 shadow">
@@ -125,4 +125,55 @@
         </form>
     </div>
 </div>
+<div class="modal fade" id="printContainer" data-backdrop="static" data-keyboard="false" role="dialog"
+    aria-labelledby="printContainer" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white">Cetak Laporan E-Samsat</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bg-white"></div>
+        </div>
+    </div>
+</div>
 @endsection
+
+@push('scripts')
+<script type="text/javascript">
+    $('#printContainer').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var modal = $(this)
+        var href = button.attr('href')
+        modal.find('.modal-body').html(setLoader())
+    });
+    $("#printForm").on('submit', function(event) {
+        event.preventDefault();
+        var form = $(this);
+        var formData = new FormData($(this)[0]);
+        
+        $.ajax({
+            url: form.attr('action'),
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            xhrFields:{
+                responseType: 'blob'
+            },
+            success: function(data) {
+                var blobData = data;
+                var url = window.URL || window.webkitURL;
+                var src = url.createObjectURL(data);
+                $("#printContainer").modal('show');
+                $("#printContainer").find('.modal-body').html(
+                    '<object type="application/pdf" data="'+src+'" width="100%" height="500">No Support</object>'
+                );
+        }
+    });
+    return false;
+});
+</script>
+@endpush
