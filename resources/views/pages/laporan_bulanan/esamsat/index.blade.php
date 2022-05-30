@@ -125,30 +125,10 @@
         </form>
     </div>
 </div>
-<div class="modal fade" id="printContainer" data-backdrop="static" data-keyboard="false" role="dialog"
-    aria-labelledby="printContainer" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h5 class="modal-title text-white">Cetak Laporan E-Samsat</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body bg-white"></div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @push('scripts')
 <script type="text/javascript">
-    $('#printContainer').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)
-        var modal = $(this)
-        var href = button.attr('href')
-        modal.find('.modal-body').html(setLoader())
-    });
     $("#printForm").on('submit', function(event) {
         event.preventDefault();
         var form = $(this);
@@ -167,10 +147,7 @@
                 var blobData = data;
                 var url = window.URL || window.webkitURL;
                 var src = url.createObjectURL(data);
-                $("#printContainer").modal('show');
-                $("#printContainer").find('.modal-body').html(
-                    '<object type="application/pdf" data="'+src+'" width="100%" height="500"><embed src="'+src+'" type="application/pdf" /></object>'
-                );
+                window.open(src, 'Cetak PDF', 'resizable=no,width=1024,height=768');
         }
     });
     return false;
