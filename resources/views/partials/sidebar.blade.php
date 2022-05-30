@@ -31,7 +31,7 @@ $menu = collect([
 ## --- submenu 3.2 --- #
 (object) [
 'title' => 'E-Samsat',
-'route' => 'laporan_bulanan.index'
+'route' => 'laporan_bulanan_esamsat.index'
 ],
 ## --- submenu 3.2 --- #
 // ## --- submenu 3.2 --- #

@@ -22,8 +22,9 @@
 <body>
 
     <h3 style="font-size: 12pt; text-align: center; margin: 0;">UPTD PPRD WILAYAH KAB. PENAJAM PASER UTARA</h3>
-    <h3 style="font-size: 12pt; text-align: center; margin: 0;">SAMSAT PAYMENT POINT WARU</h3>
-    <h3 style="font-size: 12pt; text-align: center; margin: 0 0 20pt 0;">BULAN APRIL 2022</h3>
+    <h3 style="font-size: 12pt; text-align: center; margin: 0;">SAMSAT {{ Str::upper($payment_point->nama) }}</h3>
+    <h3 style="font-size: 12pt; text-align: center; margin: 0 0 20pt 0;">BULAN {{
+        Str::upper(\Carbon\Carbon::create()->month($bulan)->monthName) }} {{ $tahun }}</h3>
 
     <table class="table" style="font-size: 10pt; width: 100%; border-collapse: collapse; margin: 0 0 20pt 0;">
         <tr style="border-bottom: 4px solid black; border-bottom-style: double;">
@@ -69,25 +70,28 @@
 
     <table style="width: 100%; border-collapse: collapse;">
         <tr>
-            <td>
+            <td style="width: 30%;">
                 <div style="text-align: center;">
-                    <div style="font-size: 10pt; margin: 10pt 0 60pt;">Kasi. Pendataan & Penetapan</div>
+                    <div style="font-size: 10pt; margin: 10pt 0 60pt;">{{ $penandatangan1->jabatan }}</div>
 
-                    <h4 style="font-size: 10pt; margin: 0 0 3pt 0; text-decoration: underline;">Donny Marisya, SE</h4>
-                    <h5 style="font-size: 10pt; font-weight: 10pt; margin: 0;">NIP. 19760201 200212 1 009</h5>
+                    <h4 style="font-size: 10pt; margin: 0 0 3pt 0; text-decoration: underline;">{{ $penandatangan1->nama
+                        }}</h4>
+                    <h5 style="font-size: 10pt; font-weight: 10pt; margin: 0;">NIP. {{ $penandatangan1->nip }}
+                    </h5>
                 </div>
             </td>
-            <td>
+            <td style="width: 40%;">
+            </td>
+            <td style="width: 30%;">
                 <div style="text-align: center;">
-                    <span>Penajam, {{
-                        \Carbon\Carbon::parse(now())->isoFormat('D MMMM Y') }}</span>
+                    <span>{{ $kota_penandatangan->nama }}, {{
+                        \Carbon\Carbon::parse($tgl_ttd)->isoFormat('D MMMM Y') }}</span>
 
-                    <div style="font-size: 10pt; margin: 10pt 0 60pt;">Pengelola Layanan Operasional</div>
+                    <div style="font-size: 10pt; margin: 10pt 0 60pt;">{{ $penandatangan2->jabatan }}</div>
 
-                    <h4 style="font-size: 10pt; margin: 0 0 3pt 0; text-decoration: underline;">Muhammad Donny Dermawan,
-                        A.Md.Pnl.
-                    </h4>
-                    <h5 style="font-size: 10pt; font-weight: 10pt; margin: 0;">NIP. 19991105 202201 1 002</h5>
+                    <h4 style="font-size: 10pt; margin: 0 0 3pt 0; text-decoration: underline;">{{
+                        $penandatangan2->nama }}</h4>
+                    <h5 style="font-size: 10pt; font-weight: 10pt; margin: 0;">NIP. {{ $penandatangan2->nip }}</h5>
                 </div>
             </td>
         </tr>

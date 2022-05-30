@@ -14,8 +14,8 @@ return [
     */
 
     'name' => env('APP_NAME', 'SIPAPan'),
-    'description' => env('APP_DESCRIPTION', 'Sistem Informasi Pajak Air Permukaan'),
-    'author' => env('APP_AUTHOR', 'Bapenda Provinsi Kalimantan Timur - UPTD PPRD Penajam Paser Utara'),
+    'description' => env('APP_DESCRIPTION', 'LaporPAK'),
+    'author' => env('APP_AUTHOR', 'UPTD PPRD Penajam Paser Utara'),
     'version' => env('APP_VERSION', '1.0.0'),
 
     /*
