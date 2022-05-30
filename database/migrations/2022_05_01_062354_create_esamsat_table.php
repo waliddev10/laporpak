@@ -27,6 +27,8 @@ class CreateEsamsatTable extends Migration
             $table->unsignedBigInteger('payment_point_id');
             $table->unsignedBigInteger('wilayah_id');
             $table->unsignedBigInteger('kasir_id');
+            $table->boolean('status_esamsat')->default(false);
+            $table->unsignedBigInteger('kasir_pembayaran_id')->nullable();
             $table->timestamps();
 
             $table->foreign('payment_point_id')
@@ -44,6 +46,10 @@ class CreateEsamsatTable extends Migration
             $table->foreign('kasir_id')
                 ->references('id')
                 ->on('kasir')
+                ->onDelete('cascade');
+            $table->foreign('kasir_pembayaran_id')
+                ->references('id')
+                ->on('kasir_pembayaran')
                 ->onDelete('cascade');
         });
     }

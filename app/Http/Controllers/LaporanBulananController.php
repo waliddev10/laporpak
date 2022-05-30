@@ -11,10 +11,9 @@ use App\Models\PaymentPoint;
 use App\Models\Wilayah;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Validation\Rule;
 use Yajra\DataTables\DataTables;
 
-class LaporanHarianController extends Controller
+class LaporanBulananController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +26,7 @@ class LaporanHarianController extends Controller
             return DataTables::of(PaymentPoint::all())
                 ->addColumn('action', function ($item) {
                     return '<div class="btn-group">
-                    <a class="btn btn-xs btn-success" href="' . route('laporan_harian.show', $item->id) . '"><i class="fas fa-eye fa-fw"></i></a>
+                    <a class="btn btn-xs btn-success" href="' . route('laporan_bulanan.show', $item->id) . '"><i class="fas fa-folder-open fa-fw"></i></a>
                     </div>';
                 })
                 ->rawColumns(['action'])
@@ -35,7 +34,7 @@ class LaporanHarianController extends Controller
                 ->make(true);
         }
 
-        return view('pages.laporan_harian.index');
+        return view('pages.laporan_bulanan.index');
     }
 
     /**
@@ -49,7 +48,7 @@ class LaporanHarianController extends Controller
         $kasir = Kasir::orderBy('nama', 'asc')->get();
         $kasir_pembayaran = KasirPembayaran::orderBy('nama', 'asc')->get();
 
-        return view('pages.laporan_harian.create', [
+        return view('pages.laporan_bulanan.create', [
             'payment_point' => $payment_point,
             'jenis_pkb' => $jenis_pkb,
             'wilayah' => $wilayah,
@@ -78,10 +77,8 @@ class LaporanHarianController extends Controller
             'nilai_denda' => 'required',
             'wilayah_id' => 'required',
             'kasir_id' => 'required',
-            'status_esamsat' => 'required|boolean',
-            'kasir_pembayaran_id' => Rule::requiredIf(function () use ($request) {
-                return $request->status_esamsat == true;
-            })
+            'status_esamsat' => 'required',
+            'kasir_pembayaran_id' => 'nullable'
         ]);
 
         Esamsat::create([
@@ -117,29 +114,23 @@ class LaporanHarianController extends Controller
     {
         if ($request->ajax()) {
             return DataTables::of(
-                Esamsat::with(['jenis_pkb', 'wilayah', 'kasir', 'kasir_pembayaran'])
+                Esamsat::with(['jenis_pkb', 'wilayah', 'kasir'])
                     ->where('payment_point_id', $payment_point->id)
                     ->orderBy('tgl_cetak', 'desc')
                     ->get()
             )
                 ->addColumn('action', function ($item) use ($payment_point) {
-                    return '<div class="btn-group"><button class="btn btn-xs btn-warning" title="Ubah" data-toggle="modal" data-target="#modalContainer" data-title="Ubah" href="' .  route('laporan_harian.edit', ['payment_point' => $payment_point->id, 'esamsat' => $item->id]) . '"><i class="fas fa-edit fa-fw"></i></button><button href="' . route('laporan_harian.destroy', ['payment_point' => $payment_point->id, 'esamsat' => $item->id]) . '" class="btn btn-xs btn-danger delete" data-target-table="tableDokumen"><i class="fa fa-trash"></i></button>
+                    return '<div class="btn-group"><button class="btn btn-xs btn-warning" title="Ubah" data-toggle="modal" data-target="#modalContainer" data-title="Ubah" href="' .  route('laporan_bulanan.edit', ['payment_point' => $payment_point->id, 'esamsat' => $item->id]) . '"><i class="fas fa-edit fa-fw"></i></button><button href="' . route('laporan_bulanan.destroy', ['payment_point' => $payment_point->id, 'esamsat' => $item->id]) . '" class="btn btn-xs btn-danger delete" data-target-table="tableDokumen"><i class="fa fa-trash"></i></button>
                     </div>';
                 })
                 ->addColumn('no_pol_lengkap', function ($item) {
                     return '<div class="d-flex justify-content-between"><span>' . $item->awalan_no_pol . '</span><span class="mx-1">' . $item->no_pol . '</span><span>' . $item->akhiran_no_pol . '</span></div>';
                 })
                 ->editColumn('nilai_pokok', function ($item) {
-                    return '<small class="float-left">Rp.</small><span class="float-right">' . number_format($item->nilai_pokok, 0, ',', '.') . '</span>';
+                    return '<span class="float-left">Rp.</span><span class="float-right">' . number_format($item->nilai_pokok, 0, ',', '.') . '</span>';
                 })
                 ->editColumn('nilai_denda', function ($item) {
-                    return '<small class="float-left">Rp.</small><span class="float-right">' . number_format($item->nilai_denda, 0, ',', '.') . '</span>';
-                })
-                ->addColumn('esamsat', function ($item) {
-                    if ($item->status_esamsat == true)
-                        return  $item->kasir_pembayaran->nama;
-
-                    return '-';
+                    return '<span class="float-left">Rp.</span><span class="float-right">' . number_format($item->nilai_denda, 0, ',', '.') . '</span>';
                 })
                 ->rawColumns([
                     'action',
@@ -153,7 +144,7 @@ class LaporanHarianController extends Controller
 
         $jenis_pkb = JenisPkb::orderBy('nama', 'asc')->get();
 
-        return view('pages.laporan_harian.show', [
+        return view('pages.laporan_bulanan.show', [
             'payment_point' => $payment_point,
             'jenis_pkb' => $jenis_pkb
         ]);
@@ -172,7 +163,7 @@ class LaporanHarianController extends Controller
         $jenis_pkb = JenisPkb::orderBy('nama', 'asc')->get();
         $kasir_pembayaran = KasirPembayaran::orderBy('nama', 'asc')->get();
 
-        return view('pages.laporan_harian.edit', [
+        return view('pages.laporan_bulanan.edit', [
             'item' => $esamsat,
             'jenis_pkb' => $jenis_pkb,
             'payment_point' => $payment_point,
@@ -203,10 +194,8 @@ class LaporanHarianController extends Controller
             'nilai_denda' => 'required',
             'wilayah_id' => 'required',
             'kasir_id' => 'required',
-            'status_esamsat' => 'required|boolean',
-            'kasir_pembayaran_id' => Rule::requiredIf(function () use ($request) {
-                return $request->status_esamsat == true;
-            })
+            'status_esamsat' => 'required',
+            'kasir_pembayaran_id' => 'nullable'
         ]);
 
         $data = Esamsat::findOrFail($esamsat);

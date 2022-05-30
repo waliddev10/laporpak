@@ -20,7 +20,9 @@ class Esamsat extends Model
         'nilai_denda',
         'payment_point_id',
         'wilayah_id',
-        'kasir_id'
+        'kasir_id',
+        'status_esamsat',
+        'kasir_pembayaran_id',
     ];
 
     public function jenis_pkb()
@@ -36,5 +38,10 @@ class Esamsat extends Model
     public function kasir()
     {
         return $this->belongsTo(Kasir::class);
+    }
+
+    public function kasir_pembayaran()
+    {
+        return $this->belongsTo(KasirPembayaran::class);
     }
 }

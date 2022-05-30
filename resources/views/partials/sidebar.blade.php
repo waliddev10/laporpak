@@ -31,15 +31,15 @@ $menu = collect([
 ## --- submenu 3.2 --- #
 (object) [
 'title' => 'E-Samsat',
-'route' => 'dashboard'
+'route' => 'laporan_bulanan.index'
 ],
 ## --- submenu 3.2 --- #
-## --- submenu 3.2 --- #
-(object) [
-'title' => 'SKPD',
-'route' => 'dashboard'
-],
-## --- submenu 3.2 --- #
+// ## --- submenu 3.2 --- #
+// (object) [
+// 'title' => 'SKPD',
+// 'route' => 'dashboard'
+// ],
+// ## --- submenu 3.2 --- #
 ]
 ],
 # --- menu 2 --- #
@@ -99,8 +99,14 @@ $menu = collect([
 ## --- submenu 3.2 --- #
 ## --- submenu 3.2 --- #
 (object) [
-'title' => 'Kasir',
+'title' => 'Jenis Kasir',
 'route' => 'kasir.index'
+],
+## --- submenu 3.2 --- #
+## --- submenu 3.2 --- #
+(object) [
+'title' => 'Kasir Pembayaran',
+'route' => 'kasir_pembayaran.index'
 ],
 ## --- submenu 3.2 --- #
 ]

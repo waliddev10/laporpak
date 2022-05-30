@@ -1,6 +1,7 @@
 <?php
 
 use Database\Seeders\JenisPkbSeeder;
+use Database\Seeders\KasirPembayaranSeeder;
 use Database\Seeders\KasirSeeder;
 use Database\Seeders\KotaPenandatanganSeeder;
 use Database\Seeders\PaymentPointSeeder;
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PaymentPointSeeder::class);
         $this->call(WilayahSeeder::class);
         $this->call(JenisPkbSeeder::class);
+        $this->call(KasirPembayaranSeeder::class);
         $this->call(KasirSeeder::class);
     }
 }

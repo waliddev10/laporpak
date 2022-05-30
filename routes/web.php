@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\LaporanBulananController;
 use App\Http\Controllers\LaporanHarianController;
 use App\Http\Controllers\Pengaturan\JenisPkbController;
 use App\Http\Controllers\Pengaturan\KasirController;
+use App\Http\Controllers\Pengaturan\KasirPembayaranController;
 use App\Http\Controllers\Pengaturan\KotaPenandatanganController;
 use App\Http\Controllers\Pengaturan\PaymentPointController;
 use App\Http\Controllers\Pengaturan\PenandatanganController;
@@ -69,10 +71,28 @@ Route::middleware(['auth'])->group(function () {
             ->name('laporan_harian.destroy');
     });
 
+    Route::prefix('/laporan_bulanan')->group(function () {
+        Route::get('/', [LaporanBulananController::class, 'index'])
+            ->name('laporan_bulanan.index');
+        Route::get('/payment_point/{payment_point}', [LaporanBulananController::class, 'show'])
+            ->name('laporan_bulanan.show');
+        Route::get('/payment_point/{payment_point}/{jenis_pkb}/create', [LaporanBulananController::class, 'create'])
+            ->name('laporan_bulanan.create');
+        Route::post('/payment_point/{payment_point}', [LaporanBulananController::class, 'store'])
+            ->name('laporan_bulanan.store');
+        Route::get('/payment_point/{payment_point}/{esamsat}', [LaporanBulananController::class, 'edit'])
+            ->name('laporan_bulanan.edit');
+        Route::put('/payment_point/{payment_point}/{esamsat}', [LaporanBulananController::class, 'update'])
+            ->name('laporan_bulanan.update');
+        Route::delete('/payment_point/{payment_point}/{esamsat}', [LaporanBulananController::class, 'destroy'])
+            ->name('laporan_bulanan.destroy');
+    });
+
     Route::prefix('/pengaturan')->group(function () {
         Route::resource('/jenis_pkb', JenisPkbController::class)->except('show');
         Route::resource('/wilayah', WilayahController::class)->except('show');
         Route::resource('/kasir', KasirController::class)->except('show');
+        Route::resource('/kasir_pembayaran', KasirPembayaranController::class)->except('show');
         Route::resource('/payment_point', PaymentPointController::class)->except('show');
         Route::resource('/penandatangan', PenandatanganController::class)->except('show');
         Route::resource('/kota_penandatangan', KotaPenandatanganController::class)->except('show');
