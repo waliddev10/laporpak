@@ -169,7 +169,7 @@
                 var src = url.createObjectURL(data);
                 $("#printContainer").modal('show');
                 $("#printContainer").find('.modal-body').html(
-                    '<object type="application/pdf" data="'+src+'" width="100%" height="500">No Support</object>'
+                    '<object type="application/pdf" data="'+src+'" width="100%" height="500"><embed src="'+src+'" type="application/pdf" /></object>'
                 );
         }
     });
