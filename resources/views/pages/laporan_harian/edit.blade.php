@@ -109,11 +109,53 @@
                 </div>
             </div>
 
+            <div class="border p-3 my-2 shadow">
+                <div class="form-group">
+                    <strong>E-SAMSAT</strong>
+                </div>
+                <div class="form-group">
+                    <label class="font-weight-semibold">Status E-SAMSAT</label>
+                    @php
+                    $status_esamsat = [
+                    (object) [
+                    'nama' => 'Iya',
+                    'value' => 1,
+                    ],
+                    (object) [
+                    'nama' => 'Tidak',
+                    'value' => 0,
+                    ],
+                    ];
+                    @endphp
+                    @foreach ($status_esamsat as $se)
+                    <div class="form-check">
+                        <input @if($se->value == $item->status_esamsat) checked @endif class="form-check-input"
+                        type="radio" name="status_esamsat"
+                        id="status_esamsat_{{ $se->nama }}" value="{{ $se->value }}">
+                        <label class="form-check-label" for="status_esamsat_{{ $se->nama }}">
+                            {{ $se->nama }}
+                        </label>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="form-group">
+                    <label class="font-weight-semibold">Kasir Pembayaran</label>
+                    <select name="kasir_pembayaran_id" class="form-control">
+                        <option selected disabled>Pilih Kasir Pembayaran...</option>
+                        @foreach ($kasir_pembayaran as $kp)
+                        <option value="{{ $kp->id }}" @if($kp->id == $item->kasir_pembayaran_id) selected @endif>{{
+                            $kp->nama }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
             <div class="form-group mt-5 row text-right">
                 <div class="col-12">
                     <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
                 </div>
             </div>
+
         </div>
     </div>
 
