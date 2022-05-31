@@ -18,7 +18,7 @@
         @endforeach
     </div>
     <div class="card-body">
-        <form method="POST" id="search-form" class="form-inline">
+        <form id="search-form" class="form-inline">
             <div class="form-group mr-2">
                 <select name="bulan" class="form-control">
                     <option selected value="Semua">-- Semua Bulan --</option>
