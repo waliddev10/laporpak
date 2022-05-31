@@ -115,13 +115,21 @@ class LaporanHarianController extends Controller
      */
     public function show(PaymentPoint $payment_point, Request $request)
     {
+        $esamsats = Esamsat::with(['jenis_pkb', 'wilayah', 'kasir', 'kasir_pembayaran'])
+            ->where('payment_point_id', $payment_point->id)
+            ->orderBy('tgl_cetak', 'desc');
+
         if ($request->ajax()) {
-            return DataTables::of(
-                Esamsat::with(['jenis_pkb', 'wilayah', 'kasir', 'kasir_pembayaran'])
-                    ->where('payment_point_id', $payment_point->id)
-                    ->orderBy('tgl_cetak', 'desc')
-                    ->get()
-            )
+            return DataTables::of($esamsats)
+                ->filter(function ($query) use ($request) {
+                    if ($request->has('bulan') && $request->bulan != 'Semua') {
+                        $query->whereMonth('tgl_cetak', $request->bulan);
+                    }
+
+                    if ($request->has('tahun')) {
+                        $query->whereYear('tgl_cetak', $request->tahun);
+                    }
+                })
                 ->addColumn('action', function ($item) use ($payment_point) {
                     return '<div class="btn-group"><button class="btn btn-xs btn-warning" title="Ubah" data-toggle="modal" data-target="#modalContainer" data-title="Ubah" href="' .  route('laporan_harian.edit', ['payment_point' => $payment_point->id, 'esamsat' => $item->id]) . '"><i class="fas fa-edit fa-fw"></i></button><button href="' . route('laporan_harian.destroy', ['payment_point' => $payment_point->id, 'esamsat' => $item->id]) . '" class="btn btn-xs btn-danger delete" data-target-table="tableDokumen"><i class="fa fa-trash"></i></button>
                     </div>';

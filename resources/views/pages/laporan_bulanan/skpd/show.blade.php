@@ -1,59 +1,23 @@
 @extends('layouts.app')
 
-@section('title', 'Laporan Harian ' . $payment_point->nama)
+@section('title', 'Laporan Bulanan ' . $payment_point->nama)
 
 @section('content')
 <div class="card shadow">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Laporan Harian {{ $payment_point->nama }}</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Laporan Bulanan {{ $payment_point->nama }}</h6>
     </div>
     <div class="card-body">
         @foreach($jenis_pkb as $jenis)
-        <button class="btn btn-outline-primary btn-sm" title="Tambah Laporan Harian - {{ $payment_point->nama }}"
+        <button class="btn btn-outline-primary btn-sm" title="Tambah Laporan Bulanan - {{ $payment_point->nama }}"
             data-toggle="modal" data-target="#modalContainer"
-            data-title="Laporan Harian {{ $jenis->nama }} - {{ $payment_point->nama }}"
-            href="{{ route('laporan_harian.create', ['payment_point' => $payment_point->id, 'jenis_pkb' => $jenis->id ]) }}"><i
+            data-title="Laporan Bulanan {{ $jenis->nama }} - {{ $payment_point->nama }}"
+            href="{{ route('laporan_bulanan.create', ['payment_point' => $payment_point->id, 'jenis_pkb' => $jenis->id ]) }}"><i
                 class="fa fa-plus fa-fw"></i>
             Laporan {{ $jenis->nama }}</button>
         @endforeach
-    </div>
-    <div class="card-body">
-        <form method="POST" id="search-form" class="form-inline">
-            <div class="form-group mr-2">
-                <select name="bulan" class="form-control">
-                    <option selected value="Semua">-- Semua Bulan --</option>
-                    @php
-                    $bulan = 1;
-                    @endphp
-                    @while ($bulan <= 12) <option value="{{ $bulan }}" @if(old('bulan')==$bulan) selected @endif>{{
-                        \Carbon\Carbon::create()->month($bulan)->monthName }}
-                        </option>
-                        @php
-                        $bulan++;
-                        @endphp
-                        @endwhile
-                </select>
-            </div>
-            <div class="form-group mr-2">
-                <select name="bulan" class="form-control">
-                    <option selected disabled>Pilih Tahun...</option>
-                    @php
-                    $tahun = 2022;
-                    @endphp
-                    @while ($tahun <= \Carbon\Carbon::parse(now())->year) <option value="{{ $tahun }}"
-                            @if(\Carbon\Carbon::parse(now())->year == $tahun) selected @endif>{{
-                            $tahun }}
-                        </option>
-                        @php
-                        $tahun++;
-                        @endphp
-                        @endwhile
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary"><i class="fa fa-filter fa-fw"></i> Filter</button>
-        </form>
         <div class="table-responsive mt-3">
-            <table id="laporan_harianTable" class="table table-sm table-bordered table-hover" width="100%"
+            <table id="laporan_bulananTable" class="table table-sm table-bordered table-hover" width="100%"
                 cellspacing="0">
                 <thead>
                     <tr>
@@ -65,7 +29,6 @@
                         <th rowspan="2" class="text-center">No. Polisi</th>
                         <th colspan="2" class="text-center">Jumlah</th>
                         <th colspan="2" class="text-center">Wilayah</th>
-                        <th rowspan="2" class="text-center">E-Samsat</th>
                     </tr>
                     <tr>
                         <th class="text-center">Cetak</th>
@@ -100,17 +63,11 @@
 
 @push('scripts')
 <script type="text/javascript">
-    var tableDokumen = $('#laporan_harianTable').DataTable({
+    var tableDokumen = $('#laporan_bulananTable').DataTable({
         responsive: true,
         processing: true,
         serverSide: true,
-        ajax: {
-            url: '{!! route('laporan_harian.show', $payment_point->id) !!}',
-            data: function (d) {
-                d.bulan = $('select[name=bulan]').val();
-                d.tahun = $('select[name=tahun]').val();
-            }
-        },
+        ajax: '{!! route('laporan_bulanan.show', $payment_point->id) !!}',
         columns: [
             { data: 'action', name: 'action', className: 'text-nowrap text-center', width: '1%', orderable: false, searchable: false },
             { data: 'DT_RowIndex', name: 'DT_RowIndex', className: 'text-center', width: '1%' , searchable: false, orderable: false},
@@ -123,13 +80,7 @@
             { data: 'nilai_denda', name: 'nilai_denda', className: 'text-nowrap' },
             { data: 'wilayah.nama', name: 'wilayah.nama' },
             { data: 'kasir.nama', name: 'kasir.nama', className: 'text-center' },
-            { data: 'esamsat', name: 'esamsat', className: 'text-center' },
         ],
-    });
-
-    $('#search-form').on('submit', function(e) {
-        tableDokumen.draw();
-        e.preventDefault();
     });
 </script>
 @endpush
