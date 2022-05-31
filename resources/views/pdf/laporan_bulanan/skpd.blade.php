@@ -89,7 +89,7 @@
         \Carbon\Carbon::parse($tgl_selesai)->isoFormat('D MMMM Y') }}, dengan
         perincian sebagai berikut :</p>
 
-    <table class="table" style="font-size: 9pt; width: 100%; border-collapse: collapse; margin: 0 0 20pt 0;">
+    <table class="table" style="font-size: 9pt; width: 100%; border-collapse: collapse; margin: 0 0 10pt 0;">
         <tr style="border-bottom: 4px solid black; border-bottom-style: double;">
             <th style="border: 0.5pt solid black; width: 5%;">NO.</th>
             <th style="border: 0.5pt solid black; width: 25%;">TANGGAL</th>
