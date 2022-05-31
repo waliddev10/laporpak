@@ -137,22 +137,21 @@ class LaporanBulananSkpdController extends Controller
             ->when($request->tahun, function ($query) use ($request) {
                 return $query->whereYear('tgl_cetak', $request->tahun);
             })
-            ->when($request->tgl_mulai, function ($query) use ($request) {
-                return $query->whereDate('tgl_cetak', '>=', date('Y-m-d', $request->tgl_mulai));
-            })
-            ->when($request->tgl_selesai, function ($query) use ($request) {
-                return $query->whereDate('tgl_cetak', '<=', date('Y-m-d', $request->tgl_selesai));
-            })
+            // ->when($request->tgl_mulai, function ($query) use ($request) {
+            //     return $query->whereDate('tgl_cetak', '>=', date('Y-m-d', $request->tgl_mulai));
+            // })
+            // ->when($request->tgl_selesai, function ($query) use ($request) {
+            //     return $query->whereDate('tgl_cetak', '<=', date('Y-m-d', $request->tgl_selesai));
+            // })
             ->orderBy('tgl_cetak', 'asc')
             ->get();
 
         $data = $esamsat_data->groupBy('tgl_cetak')
-            // ->filter(function ($item, $key) use ($request) {
-            //     if (date('Y-m-d', $key) >= date('Y-m-d', $request->tgl_mulai) && date('Y-m-d', $key) <= date('Y-m-d', $request->tgl_selesai)) {
-            //         return $item;
-            //     }
-            // })
-        ;
+            ->filter(function ($item, $key) use ($request) {
+                if (date('Y-m-d', $key) >= date('Y-m-d', $request->tgl_mulai) && date('Y-m-d', $key) <= date('Y-m-d', $request->tgl_selesai)) {
+                    return $item;
+                }
+            });
 
         $pdf = PDF::loadView('pdf.laporan_bulanan.skpd', [
             'data' => $data,
