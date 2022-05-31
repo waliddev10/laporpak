@@ -13,7 +13,6 @@ use App\Models\Wilayah;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 
 class LaporanBulananPenerimaanController extends Controller
 {
@@ -137,15 +136,15 @@ class LaporanBulananPenerimaanController extends Controller
                 return $query->where('wilayah_id', $request->wilayah_id);
             })
             ->when($request->bulan, function ($query) use ($request) {
-                return $query->whereMonth('tgl_bayar', $request->bulan);
+                return $query->whereMonth('tgl_cetak', $request->bulan);
             })
             ->when($request->tahun, function ($query) use ($request) {
-                return $query->whereYear('tgl_bayar', $request->tahun);
+                return $query->whereYear('tgl_cetak', $request->tahun);
             })
-            ->orderBy('tgl_bayar', 'asc')
+            ->orderBy('tgl_cetak', 'asc')
             ->get();
 
-        $data = $esamsat_data->groupBy('tgl_bayar');
+        $data = $esamsat_data->groupBy('tgl_cetak');
         // dd($data);
 
         $pdf = PDF::loadView('pdf.laporan_bulanan.penerimaan', [
