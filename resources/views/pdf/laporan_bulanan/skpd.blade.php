@@ -114,13 +114,62 @@
             <td style="border: 0.5pt solid black; text-align: center;">11</td>
         </tr>
         <tr>
+            <td style="border: 0.5pt solid black; text-align: center;">3</td>
+            <td style="border: 0.5pt solid black; text-align: center;">03 April 2022</td>
+            <td style="border: 0.5pt solid black; text-align: center;">
+                <table style="width: 100%; padding: 0; margin: 0;">
+                    <tr style="padding: 0; margin: 0;">
+                        <td style="padding: 0; margin: 0; text-align: center;">727442</td>
+                        <td style="padding: 0; margin: 0; text-align: center;">s.d.</td>
+                        <td style="padding: 0; margin: 0; text-align: center;">727452</td>
+                    </tr>
+                </table>
+            </td>
+            <td style="border: 0.5pt solid black; text-align: center;">11</td>
+        </tr>
+        <tr>
             <th colspan="3" style="border: 0.5pt solid black; text-align: center;">JUMLAH</th>
-            <th style="border: 0.5pt solid black; text-align: center;">11</th>
+            <th style="border: 0.5pt solid black; text-align: center;">33</th>
         </tr>
     </table>
 
     <p style="text-indent: 1cm; text-align: justify; line-height: 16pt;">Demikian Berita Acara ini dibuat dan
         ditandatangani bersama untuk dipergunakan sebagaimana mestinya.</p>
 
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td style="width: 35%;">
+                <div style="text-align: center;">
+                    <div style="margin: 10pt 0 50pt;">Pengelola Layanan Operasional</div>
+
+                    <h4 style="margin: 0 0 3pt 0; text-decoration: underline;">MUHAMMAD DONNY DERMAWAN,
+                        A.Md.Pnl.</h4>
+                    <h5 style="font-weight: normal; margin: 0;">NIP. 19991105 202201 1 002
+                    </h5>
+                </div>
+            </td>
+            <td style="width: 30%;">
+            </td>
+            <td style="width: 35%;">
+                <div style="text-align: center;">
+                    <div style="margin: 10pt 0 50pt;">Kasi. Pendataan dan Penetapan</div>
+
+                    <h4 style="margin: 0 0 3pt 0; text-decoration: underline;">DONNY MARISYA, SE</h4>
+                    <h5 style="font-weight: normal; margin: 0;">NIP. 19760201 200212 1 009</h5>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div style="text-align: center;">
+                    <span>Mengetahui,</span>
+                    <div style="margin: 5pt 0 50pt;">Kepala UPTD</div>
+
+                    <h4 style="margin: 0 0 3pt 0; text-decoration: underline;">H. ARIFIN, S.SOS</h4>
+                    <h5 style="font-weight: normal; margin: 0;">NIP. 19661104 199002 1 002</h5>
+                </div>
+            </td>
+        </tr>
+    </table>
 
 </body>
