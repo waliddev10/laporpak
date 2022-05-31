@@ -104,7 +104,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label class="font-weight-semibold">Penandatangan Pertama</label>
+                            <label class="font-weight-semibold">Penandatangan Pertama (Kasi)</label>
                             <select name="penandatangan1_id" class="form-control">
                                 <option selected disabled>Pilih Penandatangan Pertama...</option>
                                 @foreach ($penandatangan as $p1)
@@ -145,7 +145,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="font-weight-semibold">Penandatangan Kedua</label>
+                            <label class="font-weight-semibold">Penandatangan Kedua (PLO)</label>
                             <select name="penandatangan2_id" class="form-control">
                                 <option selected disabled>Pilih Penandatangan Kedua...</option>
                                 @foreach ($penandatangan as $p2)
