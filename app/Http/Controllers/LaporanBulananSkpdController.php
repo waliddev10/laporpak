@@ -23,13 +23,17 @@ class LaporanBulananSkpdController extends Controller
      */
     public function index(Request $request)
     {
-        return view('pages.laporan_bulanan.skpd.index', [
-            'penandatangan' => Penandatangan::orderBy('nama', 'asc')->get(),
-            'kota_penandatangan' => KotaPenandatangan::orderBy('nama', 'asc')->get(),
-            'payment_point' => PaymentPoint::orderBy('nama', 'asc')->get(),
-            'kasir' => Kasir::orderBy('nama', 'asc')->get(),
-            'wilayah' => Wilayah::orderBy('nama', 'asc')->get(),
-        ]);
+        $pdf = PDF::loadView('pdf.laporan_bulanan.skpd', []);
+        $pdf->setPaper('legal', 'potrait');
+        return $pdf->stream('laporan_bulanan_skpd.pdf');
+
+        // return view('pages.laporan_bulanan.skpd.index', [
+        //     'penandatangan' => Penandatangan::orderBy('nama', 'asc')->get(),
+        //     'kota_penandatangan' => KotaPenandatangan::orderBy('nama', 'asc')->get(),
+        //     'payment_point' => PaymentPoint::orderBy('nama', 'asc')->get(),
+        //     'kasir' => Kasir::orderBy('nama', 'asc')->get(),
+        //     'wilayah' => Wilayah::orderBy('nama', 'asc')->get(),
+        // ]);
     }
 
     /**
