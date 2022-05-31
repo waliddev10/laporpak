@@ -137,15 +137,15 @@ class LaporanBulananPenerimaanController extends Controller
                 return $query->where('wilayah_id', $request->wilayah_id);
             })
             ->when($request->bulan, function ($query) use ($request) {
-                return $query->whereMonth('tgl_cetak', $request->bulan);
+                return $query->whereMonth('tgl_bayar', $request->bulan);
             })
             ->when($request->tahun, function ($query) use ($request) {
-                return $query->whereYear('tgl_cetak', $request->tahun);
+                return $query->whereYear('tgl_bayar', $request->tahun);
             })
-            ->orderBy('tgl_cetak', 'asc')
+            ->orderBy('tgl_bayar', 'asc')
             ->get();
 
-        $data = $esamsat_data->groupBy('tgl_cetak');
+        $data = $esamsat_data->groupBy('tgl_bayar');
         // dd($data);
 
         $pdf = PDF::loadView('pdf.laporan_bulanan.penerimaan', [

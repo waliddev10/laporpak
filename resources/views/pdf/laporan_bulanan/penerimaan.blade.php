@@ -72,7 +72,7 @@
             <tr>
                 {{-- 1 --}} <td style="border: 0.5pt solid black; text-align: center;">{{ $loop->iteration }}</td>
                 {{-- 2 --}} <td style="border: 0.5pt solid black; text-align: center;">{{
-                    \Carbon\Carbon::parse($key)->format('d/m/Y') }}</td>
+                    \Carbon\Carbon::parse($key)->isoFormat('D MMMM Y') }}</td>
                 @foreach ($jenis_pkb as $jj)
                 @php
                 $filtered_by_pkb = collect($d)->filter(function ($value, $key) use ($jj)
