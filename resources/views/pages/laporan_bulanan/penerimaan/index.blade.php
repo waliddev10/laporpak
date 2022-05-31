@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Laporan Bulanan E-Samsat')
+@section('title', 'Laporan Penerimaan Bulanan')
 
 @section('content')
 <div class="card shadow">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Laporan Bulanan E-Samsat</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Laporan Penerimaan Bulanan</h6>
     </div>
     <div class="card-body">
-        <form method="POST" action="{{ route('laporan_bulanan_esamsat.print') }}" accept-charset="UTF-8"
+        <form method="POST" action="{{ route('laporan_bulanan_penerimaan.print') }}" accept-charset="UTF-8"
             class="form needs-validation" autocomplete="off">
             @csrf
             <div class="border p-3 my-2 shadow">
@@ -59,6 +59,38 @@
                                     @endwhile
                             </select>
                             @error('bulan')
+                            <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="font-weight-semibold">Jenis Kasir</label>
+                            <select name="kasir_id" class="form-control">
+                                <option selected disabled>Pilih Jenis Kasir...</option>
+                                @foreach ($kasir as $ks)
+                                <option value="{{ $ks->id }}" @if(old('kasir_id')==$ks->id) selected @endif >{{
+                                    $ks->nama }}</option>
+                                @endforeach
+                            </select>
+                            @error('kasir_id')
+                            <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="font-weight-semibold">Wilayah</label>
+                            <select name="wilayah_id" class="form-control">
+                                <option selected disabled>Pilih Wilayah...</option>
+                                @foreach ($wilayah as $wil)
+                                <option value="{{ $wil->id }}" @if(old('wilayah_id')==$wil->id) selected @endif >{{
+                                    $wil->nama }}</option>
+                                @endforeach
+                            </select>
+                            @error('wilayah_id')
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>

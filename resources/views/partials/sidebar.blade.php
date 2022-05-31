@@ -34,6 +34,12 @@ $menu = collect([
 'route' => 'laporan_bulanan_esamsat.index'
 ],
 ## --- submenu 3.2 --- #
+## --- submenu 3.2 --- #
+(object) [
+'title' => 'Penerimaan',
+'route' => 'laporan_bulanan_penerimaan.index'
+],
+## --- submenu 3.2 --- #
 // ## --- submenu 3.2 --- #
 // (object) [
 // 'title' => 'SKPD',

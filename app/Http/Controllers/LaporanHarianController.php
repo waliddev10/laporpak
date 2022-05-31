@@ -98,12 +98,12 @@ class LaporanHarianController extends Controller
             'wilayah_id' => $request->wilayah_id,
             'kasir_id' => $request->kasir_id,
             'status_esamsat' => $request->status_esamsat,
-            'kasir_pembayaran_id' => $request->kasir_pembayaran_id,
+            'kasir_pembayaran_id' => (!empty($request->status_esamsat)) ? $request->kasir_pembayaran_id : null,
         ]);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Esamsat berhasil ditambah.',
+            'message' => 'Data berhasil ditambah.',
         ], Response::HTTP_CREATED);
     }
 
@@ -210,25 +210,24 @@ class LaporanHarianController extends Controller
         ]);
 
         $data = Esamsat::findOrFail($esamsat);
-        $data->update($request->only([
-            'jenis_pkb_id',
-            'tgl_cetak',
-            'tgl_bayar',
-            'no_skpd',
-            'awalan_no_pol',
-            'no_pol',
-            'akhiran_no_pol',
-            'nilai_pokok',
-            'nilai_denda',
-            'wilayah_id',
-            'kasir_id',
-            'status_esamsat',
-            'kasir_pembayaran_id',
-        ]));
+        $data->jenis_pkb_id = $request->jenis_pkb_id;
+        $data->tgl_cetak = $request->tgl_cetak;
+        $data->tgl_bayar = $request->tgl_bayar;
+        $data->no_skpd = $request->no_skpd;
+        $data->awalan_no_pol = $request->awalan_no_pol;
+        $data->no_pol = $request->no_pol;
+        $data->akhiran_no_pol = $request->akhiran_no_pol;
+        $data->nilai_pokok = $request->nilai_pokok;
+        $data->nilai_denda = $request->nilai_denda;
+        $data->wilayah_id = $request->wilayah_id;
+        $data->kasir_id = $request->kasir_id;
+        $data->status_esamsat = $request->status_esamsat;
+        $data->kasir_pembayaran_id = (!empty($request->status_esamsat)) ? $request->kasir_pembayaran_id : null;
+        $data->update();
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Esamsat berhasil diubah.',
+            'message' => 'Data berhasil diubah.',
         ], Response::HTTP_ACCEPTED);
     }
 
@@ -245,7 +244,7 @@ class LaporanHarianController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Esamsat berhasil dihapus.'
+            'message' => 'Data berhasil dihapus.'
         ], Response::HTTP_ACCEPTED);
     }
 }

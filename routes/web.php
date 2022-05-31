@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LaporanBulananEsamsatController;
+use App\Http\Controllers\LaporanBulananPenerimaanController;
 use App\Http\Controllers\LaporanHarianController;
 use App\Http\Controllers\Pengaturan\JenisPkbController;
 use App\Http\Controllers\Pengaturan\KasirController;
@@ -74,9 +75,15 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('/laporan_bulanan_esamsat')->group(function () {
         Route::get('/', [LaporanBulananEsamsatController::class, 'index'])
             ->name('laporan_bulanan_esamsat.index');
-
         Route::post('/print', [LaporanBulananEsamsatController::class, 'print'])
             ->name('laporan_bulanan_esamsat.print');
+    });
+
+    Route::prefix('/laporan_bulanan_penerimaan')->group(function () {
+        Route::get('/', [LaporanBulananPenerimaanController::class, 'index'])
+            ->name('laporan_bulanan_penerimaan.index');
+        Route::post('/print', [LaporanBulananPenerimaanController::class, 'print'])
+            ->name('laporan_bulanan_penerimaan.print');
     });
 
     Route::prefix('/pengaturan')->group(function () {
