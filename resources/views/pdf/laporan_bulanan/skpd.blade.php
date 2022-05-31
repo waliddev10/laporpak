@@ -82,7 +82,9 @@
     </div>
 
     <p style="text-align: justify; line-height: 16pt;">Secara bersama-sama melakukan pemeriksaan
-        pengeluaran/penggunaan Surat Ketetapan Kewajiban Pembayaran (SKKP) tanggal 01 s.d. 30 April 2022, dengan
+        pengeluaran/penggunaan Surat Ketetapan Kewajiban Pembayaran (SKKP) tanggal {{
+        \Carbon\Carbon::parse($tgl_mulai)->isoFormat('D') }} s.d. {{
+        \Carbon\Carbon::parse($tgl_selesai)->isoFormat('D MMMM Y') }}, dengan
         perincian sebagai berikut :</p>
 
     <table class="table" style="font-size: 10pt; width: 100%; border-collapse: collapse; margin: 0 0 20pt 0;">

@@ -11,6 +11,7 @@ use App\Models\PaymentPoint;
 use App\Models\Penandatangan;
 use App\Models\Wilayah;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -117,6 +118,8 @@ class LaporanBulananSkpdController extends Controller
         $this->validate($request, [
             'payment_point_id' => 'required',
             'bulan' => 'required',
+            'tgl_mulai' => 'required|date',
+            'tgl_selesai' => 'required|date',
             'tahun' => 'required',
             'penandatangan1_id' => 'required',
             'penandatangan2_id' => 'required',
@@ -134,15 +137,29 @@ class LaporanBulananSkpdController extends Controller
             ->when($request->tahun, function ($query) use ($request) {
                 return $query->whereYear('tgl_cetak', $request->tahun);
             })
+            ->when($request->tgl_mulai, function ($query) use ($request) {
+                return $query->whereDate('tgl_cetak', '>=', date('Y-m-d', $request->tgl_mulai));
+            })
+            ->when($request->tgl_selesai, function ($query) use ($request) {
+                return $query->whereDate('tgl_cetak', '<=', date('Y-m-d', $request->tgl_selesai));
+            })
             ->orderBy('tgl_cetak', 'asc')
             ->get();
 
-        $data = $esamsat_data->groupBy('tgl_cetak');
+        $data = $esamsat_data->groupBy('tgl_cetak')
+            // ->filter(function ($item, $key) use ($request) {
+            //     if (date('Y-m-d', $key) >= date('Y-m-d', $request->tgl_mulai) && date('Y-m-d', $key) <= date('Y-m-d', $request->tgl_selesai)) {
+            //         return $item;
+            //     }
+            // })
+        ;
 
         $pdf = PDF::loadView('pdf.laporan_bulanan.skpd', [
             'data' => $data,
             'bulan' => $request->bulan,
             'tahun' => $request->tahun,
+            'tgl_mulai' => $request->tgl_mulai,
+            'tgl_selesai' => $request->tgl_selesai,
             'payment_point' => PaymentPoint::findOrFail($request->payment_point_id),
             'penandatangan1' => Penandatangan::findOrFail($request->penandatangan1_id),
             'penandatangan2' => Penandatangan::findOrFail($request->penandatangan2_id),

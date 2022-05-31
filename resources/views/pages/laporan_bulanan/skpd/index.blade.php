@@ -64,6 +64,26 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="font-weight-semibold">Tanggal Mulai</label>
+                            <input type="date" name="tgl_mulai" class="form-control" value={{ old('tgl_mulai') }}>
+                            @error('tgl_mulai')
+                            <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="font-weight-semibold">Tanggal Selesai</label>
+                            <input type="date" name="tgl_selesai" class="form-control" value={{ old('tgl_selesai') }}>
+                            @error('tgl_selesai')
+                            <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="border p-3 my-2 shadow">
                 <div class="form-group">
