@@ -8,7 +8,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Laporan SKPD Bulanan</h6>
     </div>
     <div class="card-body">
-        <form method="POST" action="{{ route('laporan_bulanan_penerimaan.print') }}" accept-charset="UTF-8"
+        <form method="POST" action="{{ route('laporan_bulanan_skpd.print') }}" accept-charset="UTF-8"
             class="form needs-validation" autocomplete="off">
             @csrf
             <div class="border p-3 my-2 shadow">
@@ -64,38 +64,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="font-weight-semibold">Jenis Kasir</label>
-                            <select name="kasir_id" class="form-control">
-                                <option selected disabled>Pilih Jenis Kasir...</option>
-                                @foreach ($kasir as $ks)
-                                <option value="{{ $ks->id }}" @if(old('kasir_id')==$ks->id) selected @endif >{{
-                                    $ks->nama }}</option>
-                                @endforeach
-                            </select>
-                            @error('kasir_id')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="font-weight-semibold">Wilayah</label>
-                            <select name="wilayah_id" class="form-control">
-                                <option selected disabled>Pilih Wilayah...</option>
-                                @foreach ($wilayah as $wil)
-                                <option value="{{ $wil->id }}" @if(old('wilayah_id')==$wil->id) selected @endif >{{
-                                    $wil->nama }}</option>
-                                @endforeach
-                            </select>
-                            @error('wilayah_id')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="border p-3 my-2 shadow">
                 <div class="form-group">
@@ -118,31 +86,12 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="font-weight-semibold">Tempat Tanda Tangan</label>
-                                    <select name="kota_penandatangan_id" class="form-control">
-                                        <option selected disabled>Pilih Tempat (Kota)...</option>
-                                        @foreach ($kota_penandatangan as $kota)
-                                        <option value="{{ $kota->id }}" @if(old('kota_penandatangan_id')==$kota->id)
-                                            selected @endif>{{ $kota->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('kota_penandatangan_id')
-                                    <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="font-weight-semibold">Tanggal Tanda Tangan</label>
-                                    <input type="date" name="tgl_ttd" class="form-control" value={{ old('tgl_ttd') }}>
-                                    @error('tgl_ttd')
-                                    <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label class="font-weight-semibold">Tanggal Tanda Tangan</label>
+                            <input type="date" name="tgl_ttd" class="form-control" value={{ old('tgl_ttd') }}>
+                            @error('tgl_ttd')
+                            <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label class="font-weight-semibold">Penandatangan Kedua</label>
@@ -154,6 +103,23 @@
                                 @endforeach
                             </select>
                             @error('penandatangan2_id')
+                            <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="font-weight-semibold">Penandatangan Ketiga</label>
+                            <select name="penandatangan3_id" class="form-control">
+                                <option selected disabled>Pilih Penandatangan Ketiga...</option>
+                                @foreach ($penandatangan as $p3)
+                                <option value="{{ $p3->id }}" @if(old('penandatangan3_id')==$p3->id) selected @endif>{{
+                                    $p3->nama }} ({{ $p3->jabatan }})</option>
+                                @endforeach
+                            </select>
+                            @error('penandatangan3_id')
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>

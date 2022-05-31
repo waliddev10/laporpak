@@ -46,30 +46,37 @@
         <span>Nomor: 970/ /PPRD.PPU.02/IV/2022</span>
     </div>
 
-    <p style="text-indent: 1cm; text-align: justify; line-height: 16pt;">Pada hari ini Senin tanggal
-        Sembilan Bulan Mei Tahun Dua Ribu Dua Puluh Dua, kami masing-masing yang bertanda tangan dibawah ini :
+    <p style="text-indent: 1cm; text-align: justify; line-height: 16pt;">Pada hari ini {{
+        \Carbon\Carbon::parse($tgl_ttd)->dayName }} tanggal
+        {{
+        \Carbon\Carbon::parse($tgl_ttd)->format('d') }} Bulan {{
+        \Carbon\Carbon::parse($tgl_ttd)->monthName }} Tahun {{
+        \Carbon\Carbon::parse($tgl_ttd)->format('Y') }}, kami masing-masing yang
+        bertanda tangan dibawah ini :
     </p>
 
     <div style="margin-left: 2cm; line-height: 16pt;">
         <table style="width: 100%; margin-top: 0; margin-bottom: 0;">
             <tr>
                 <td style="width: 0.5cm;">1.</td>
-                <td style="width: 40%;">H. Arifin, S.Sos.</td>
+                <td style="width: 40%;">{{ $penandatangan3->nama }}</td>
                 <td style="width: 0.3cm;">:</td>
-                <td style="width: 50%; text-align: justify;">Kepala UPTD. PPRD Wil.Penajam Paser Utara</td>
+                <td style="width: 50%; text-align: justify;">{{ $penandatangan3->jabatan }} PPRD Wil. Penajam Paser
+                    Utara
+                </td>
             </tr>
             <tr>
                 <td style="width: 0.5cm;">2.</td>
-                <td style="width: 40%;">Donny Marisya, S.E.</td>
-                <td style="width: 10%;">:</td>
-                <td style="width: 50%; text-align: justify;">Kasi Pendataan dan Penetapan</td>
+                <td style="width: 40%;">{{ $penandatangan2->nama }}</td>
+                <td style="width: 0.3cm;">:</td>
+                <td style="width: 50%; text-align: justify;">{{ $penandatangan2->jabatan }}</td>
             </tr>
             <tr>
                 <td style="width: 0.5cm;">3.</td>
-                <td style="width: 40%;">Muhammad Donny Dermawan, A.Md.Pnl.</td>
-                <td style="width: 0.3cm;">:</td>
-                <td style="width: 50%; text-align: justify;">Pengelola Layanan Operasional Samsat Payment Point Waru
-                </td>
+                <td style="width: 40%;">{{ $penandatangan1->nama }}</td>
+                <td style="width: 10%;">:</td>
+                <td style="width: 50%; text-align: justify;">{{ $penandatangan1->jabatan }} Samsat {{
+                    $payment_point->nama }}</td>
             </tr>
         </table>
     </div>
@@ -85,51 +92,41 @@
             <th style="border: 0.5pt solid black; width: 50%;">PENGGUNAAN SKKP</th>
             <th style="border: 0.5pt solid black; width: 20%;">JUMLAH</th>
         </tr>
+        @php
+        $jumlah_no_skpd = 0;
+        @endphp
+        @foreach ($data as $key => $d)
         <tr>
-            <td style="border: 0.5pt solid black; text-align: center;">1</td>
-            <td style="border: 0.5pt solid black; text-align: center;">01 April 2022</td>
+            <td style="border: 0.5pt solid black; text-align: center;">{{ $loop->iteration }}</td>
+            <td style="border: 0.5pt solid black; text-align: center;">{{
+                \Carbon\Carbon::parse($key)->isoFormat('D MMMM Y') }}</td>
             <td style="border: 0.5pt solid black; text-align: center;">
                 <table style="width: 100%; padding: 0; margin: 0;">
-                    <tr style="padding: 0; margin: 0;">
-                        <td style="padding: 0; margin: 0; text-align: center;">727442</td>
-                        <td style="padding: 0; margin: 0; text-align: center;">s.d.</td>
-                        <td style="padding: 0; margin: 0; text-align: center;">727452</td>
-                    </tr>
+                    @php
+                    $pemakaian_no_skpd = collect($d)->sortBy([
+                    fn ($a, $b) => $a->no_skpd <=> $b->no_skpd
+                        ]);
+                        @endphp
+                        <tr style="padding: 0; margin: 0;">
+                            <td style="padding: 0; margin: 0; text-align: center;">{{
+                                $pemakaian_no_skpd->first()->no_skpd
+                                }}</td>
+                            <td style="padding: 0; margin: 0; text-align: center;">s.d.</td>
+                            <td style="padding: 0; margin: 0; text-align: center;">{{
+                                $pemakaian_no_skpd->last()->no_skpd
+                                }}</td>
+                        </tr>
                 </table>
             </td>
-            <td style="border: 0.5pt solid black; text-align: center;">11</td>
+            <td style="border: 0.5pt solid black; text-align: center;">{{ count($d) }}</td>
         </tr>
-        <tr>
-            <td style="border: 0.5pt solid black; text-align: center;">2</td>
-            <td style="border: 0.5pt solid black; text-align: center;">02 April 2022</td>
-            <td style="border: 0.5pt solid black; text-align: center;">
-                <table style="width: 100%; padding: 0; margin: 0;">
-                    <tr style="padding: 0; margin: 0;">
-                        <td style="padding: 0; margin: 0; text-align: center;">727442</td>
-                        <td style="padding: 0; margin: 0; text-align: center;">s.d.</td>
-                        <td style="padding: 0; margin: 0; text-align: center;">727452</td>
-                    </tr>
-                </table>
-            </td>
-            <td style="border: 0.5pt solid black; text-align: center;">11</td>
-        </tr>
-        <tr>
-            <td style="border: 0.5pt solid black; text-align: center;">3</td>
-            <td style="border: 0.5pt solid black; text-align: center;">03 April 2022</td>
-            <td style="border: 0.5pt solid black; text-align: center;">
-                <table style="width: 100%; padding: 0; margin: 0;">
-                    <tr style="padding: 0; margin: 0;">
-                        <td style="padding: 0; margin: 0; text-align: center;">727442</td>
-                        <td style="padding: 0; margin: 0; text-align: center;">s.d.</td>
-                        <td style="padding: 0; margin: 0; text-align: center;">727452</td>
-                    </tr>
-                </table>
-            </td>
-            <td style="border: 0.5pt solid black; text-align: center;">11</td>
-        </tr>
+        @php
+        $jumlah_no_skpd = $jumlah_no_skpd + count($d);
+        @endphp
+        @endforeach
         <tr>
             <th colspan="3" style="border: 0.5pt solid black; text-align: center;">JUMLAH</th>
-            <th style="border: 0.5pt solid black; text-align: center;">33</th>
+            <th style="border: 0.5pt solid black; text-align: center;">{{ $jumlah_no_skpd }}</th>
         </tr>
     </table>
 
@@ -140,11 +137,10 @@
         <tr>
             <td style="width: 35%;">
                 <div style="text-align: center;">
-                    <div style="margin: 10pt 0 50pt;">Pengelola Layanan Operasional</div>
+                    <div style="margin: 10pt 0 50pt;">{{ $penandatangan1->jabatan }}</div>
 
-                    <h4 style="margin: 0 0 3pt 0; text-decoration: underline;">MUHAMMAD DONNY DERMAWAN,
-                        A.Md.Pnl.</h4>
-                    <h5 style="font-weight: normal; margin: 0;">NIP. 19991105 202201 1 002
+                    <h4 style="margin: 0 0 3pt 0; text-decoration: underline;">{{ $penandatangan1->nama }}</h4>
+                    <h5 style="font-weight: normal; margin: 0;">NIP. {{ $penandatangan1->nip }}
                     </h5>
                 </div>
             </td>
@@ -152,10 +148,10 @@
             </td>
             <td style="width: 35%;">
                 <div style="text-align: center;">
-                    <div style="margin: 10pt 0 50pt;">Kasi. Pendataan dan Penetapan</div>
+                    <div style="margin: 10pt 0 50pt;">{{ $penandatangan2->jabatan }}</div>
 
-                    <h4 style="margin: 0 0 3pt 0; text-decoration: underline;">DONNY MARISYA, SE</h4>
-                    <h5 style="font-weight: normal; margin: 0;">NIP. 19760201 200212 1 009</h5>
+                    <h4 style="margin: 0 0 3pt 0; text-decoration: underline;">{{ $penandatangan2->nama }}</h4>
+                    <h5 style="font-weight: normal; margin: 0;">NIP. {{ $penandatangan2->nip }}</h5>
                 </div>
             </td>
         </tr>
@@ -163,10 +159,10 @@
             <td colspan="3">
                 <div style="text-align: center;">
                     <span>Mengetahui,</span>
-                    <div style="margin: 5pt 0 50pt;">Kepala UPTD</div>
+                    <div style="margin: 5pt 0 50pt;">{{ $penandatangan3->jabatan }}</div>
 
-                    <h4 style="margin: 0 0 3pt 0; text-decoration: underline;">H. ARIFIN, S.SOS</h4>
-                    <h5 style="font-weight: normal; margin: 0;">NIP. 19661104 199002 1 002</h5>
+                    <h4 style="margin: 0 0 3pt 0; text-decoration: underline;">{{ $penandatangan3->nama }}</h4>
+                    <h5 style="font-weight: normal; margin: 0;">NIP. {{ $penandatangan3->nip }}</h5>
                 </div>
             </td>
         </tr>
