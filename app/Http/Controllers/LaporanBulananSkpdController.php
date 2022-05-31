@@ -148,7 +148,7 @@ class LaporanBulananSkpdController extends Controller
 
         $data = $esamsat_data->groupBy('tgl_cetak')
             ->filter(function ($item, $key) use ($request) {
-                if (date('Y-m-d', $key) >= date('Y-m-d', $request->tgl_mulai) && date('Y-m-d', $key) <= date('Y-m-d', $request->tgl_selesai)) {
+                if (Carbon::parse($key) >= Carbon::parse($request->tgl_mulai) && Carbon::parse($key) <= Carbon::parse($request->tgl_selesai)) {
                     return $item;
                 }
             });
