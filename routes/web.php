@@ -80,6 +80,7 @@ Route::middleware(['auth'])->group(function () {
             ->name('laporan_bulanan_esamsat.print');
     });
 
+
     Route::prefix('/laporan_bulanan_penerimaan')->group(function () {
         Route::get('/', [LaporanBulananPenerimaanController::class, 'index'])
             ->name('laporan_bulanan_penerimaan.index');
