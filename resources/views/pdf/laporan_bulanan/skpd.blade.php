@@ -78,6 +78,47 @@
         pengeluaran/penggunaan Surat Ketetapan Kewajiban Pembayaran (SKKP) tanggal 01 s.d. 30 April 2022, dengan
         perincian sebagai berikut :</p>
 
+    <table class="table" style="font-size: 10pt; width: 100%; border-collapse: collapse; margin: 0 0 20pt 0;">
+        <tr style="border-bottom: 4px solid black; border-bottom-style: double;">
+            <th style="border: 0.5pt solid black; width: 5%;">NO.</th>
+            <th style="border: 0.5pt solid black; width: 25%;">TANGGAL</th>
+            <th style="border: 0.5pt solid black; width: 50%;">PENGGUNAAN SKKP</th>
+            <th style="border: 0.5pt solid black; width: 20%;">JUMLAH</th>
+        </tr>
+        <tr>
+            <td style="border: 0.5pt solid black; text-align: center;">1</td>
+            <td style="border: 0.5pt solid black; text-align: center;">01 April 2022</td>
+            <td style="border: 0.5pt solid black; text-align: center;">
+                <table style="width: 100%; padding: 0; margin: 0;">
+                    <tr style="padding: 0; margin: 0;">
+                        <td style="padding: 0; margin: 0; text-align: center;">727442</td>
+                        <td style="padding: 0; margin: 0; text-align: center;">s.d.</td>
+                        <td style="padding: 0; margin: 0; text-align: center;">727452</td>
+                    </tr>
+                </table>
+            </td>
+            <td style="border: 0.5pt solid black; text-align: center;">11</td>
+        </tr>
+        <tr>
+            <td style="border: 0.5pt solid black; text-align: center;">2</td>
+            <td style="border: 0.5pt solid black; text-align: center;">02 April 2022</td>
+            <td style="border: 0.5pt solid black; text-align: center;">
+                <table style="width: 100%; padding: 0; margin: 0;">
+                    <tr style="padding: 0; margin: 0;">
+                        <td style="padding: 0; margin: 0; text-align: center;">727442</td>
+                        <td style="padding: 0; margin: 0; text-align: center;">s.d.</td>
+                        <td style="padding: 0; margin: 0; text-align: center;">727452</td>
+                    </tr>
+                </table>
+            </td>
+            <td style="border: 0.5pt solid black; text-align: center;">11</td>
+        </tr>
+        <tr>
+            <th colspan="3" style="border: 0.5pt solid black; text-align: center;">JUMLAH</th>
+            <th style="border: 0.5pt solid black; text-align: center;">11</th>
+        </tr>
+    </table>
+
     <p style="text-indent: 1cm; text-align: justify; line-height: 16pt;">Demikian Berita Acara ini dibuat dan
         ditandatangani bersama untuk dipergunakan sebagaimana mestinya.</p>
 
