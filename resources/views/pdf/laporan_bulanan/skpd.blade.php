@@ -43,15 +43,16 @@
 
     <div style="margin-top: 1.5cm; margin-bottom: 1cm; text-align: center;">
         <h3 style="margin: 0 0 0.2cm 0;">BERITA ACARA PENGGUNAAN SKKP</h3>
-        <span>Nomor: 970/ /PPRD.PPU.02/IV/2022</span>
+        <span>Nomor: 970/ /PPRD.PPU.02/{{
+            \Terbilang::roman(\Carbon\Carbon::parse($tgl_ttd)->format('m')) }}/2022</span>
     </div>
 
     <p style="text-indent: 1cm; text-align: justify; line-height: 16pt;">Pada hari ini {{
         \Carbon\Carbon::parse($tgl_ttd)->dayName }} tanggal
         {{
-        \Carbon\Carbon::parse($tgl_ttd)->format('d') }} Bulan {{
+        ucwords(\Terbilang::make(\Carbon\Carbon::parse($tgl_ttd)->format('d'))) }} Bulan {{
         \Carbon\Carbon::parse($tgl_ttd)->monthName }} Tahun {{
-        \Carbon\Carbon::parse($tgl_ttd)->format('Y') }}, kami masing-masing yang
+        ucwords(\Terbilang::make(\Carbon\Carbon::parse($tgl_ttd)->format('Y'))) }}, kami masing-masing yang
         bertanda tangan dibawah ini :
     </p>
 
