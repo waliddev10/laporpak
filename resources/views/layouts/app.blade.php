@@ -193,7 +193,7 @@
                         type: 'DELETE',
                         success: function(response) {
                             if(response.status == 'success'){
-                                $("#modalContainer").modal('hide');
+                                // $("#modalContainer").modal('hide');
                                 showAlert(response.message, 'success');
                                 window[dataTargetTable].ajax.reload(null, false);
                             }else{

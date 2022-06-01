@@ -4,6 +4,7 @@ $menu = collect([
 (object) [
 'title' => 'Beranda',
 'icon' => 'fas fa-fw fa-home',
+'role' => null,
 'route' => 'dashboard',
 'submenu' => null
 ],
@@ -12,14 +13,29 @@ $menu = collect([
 (object) [
 'title' => 'Laporan Harian',
 'icon' => 'fas fa-fw fa-file-alt',
-'route' => 'laporan_harian.index',
-'submenu' => null
+'role' => null,
+'route' => null,
+'submenu' => [
+## --- submenu 3.2 --- #
+(object) [
+'title' => 'Data Harian',
+'route' => 'laporan_harian.index'
+],
+## --- submenu 3.1 --- #
+## --- submenu 3.2 --- #
+(object) [
+'title' => 'SKPD Batal',
+'route' => 'laporan_harian_skpd_batal.index'
+],
+## --- submenu 3.1 --- #
+]
 ],
 # --- menu 1 --- #
 # --- menu 3 --- #
 (object) [
 'title' => 'Laporan Bulanan',
 'icon' => 'fas fa-fw fa-print',
+'role' => null,
 'route' => null,
 'submenu' => [
 ## --- submenu 3.2 --- #
@@ -46,12 +62,12 @@ $menu = collect([
 'route' => 'laporan_bulanan_skpd.index'
 ],
 ## --- submenu 3.2 --- #
-// ## --- submenu 3.2 --- #
-// (object) [
-// 'title' => 'SKPD',
-// 'route' => 'dashboard'
-// ],
-// ## --- submenu 3.2 --- #
+## --- submenu 3.2 --- #
+(object) [
+'title' => 'SKPD Batal',
+'route' => 'laporan_bulanan_skpd_batal.index'
+],
+## --- submenu 3.2 --- #
 ]
 ],
 # --- menu 2 --- #
@@ -59,6 +75,7 @@ $menu = collect([
 (object) [
 'title' => 'Pengaturan',
 'icon' => 'fas fa-fw fa-wrench',
+'role' => 'admin',
 'route' => null,
 'submenu' => [
 ## --- submenu 3.2 --- #
@@ -134,6 +151,7 @@ $menu = collect([
         </div>
     </a>
     @foreach ($menu as $m)
+    @if($m->role == Auth::user()->role || $m->role == null)
     @if(!empty($m->submenu))
     <li
         class="nav-item @foreach($m->submenu as $xsm) @if(collect($xsm)->contains(Route::currentRouteName())) active @endif @endforeach">
@@ -164,6 +182,7 @@ $menu = collect([
             <span>{{ $m->title }}</span>
         </a>
     </li>
+    @endif
     @endif
     @endforeach
 </ul>

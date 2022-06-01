@@ -1,21 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Laporan Harian ' . $payment_point->nama)
+@section('title', 'SKPD Batal ' . $payment_point->nama)
 
 @section('content')
 <div class="card shadow">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Laporan Harian {{ $payment_point->nama }}</h6>
-    </div>
-    <div class="card-body">
-        @foreach($jenis_pkb as $jenis)
-        <button class="btn btn-outline-primary btn-sm" title="Tambah Laporan Harian - {{ $payment_point->nama }}"
-            data-toggle="modal" data-target="#modalContainer"
-            data-title="Laporan Harian {{ $jenis->nama }} - {{ $payment_point->nama }}"
-            href="{{ route('laporan_harian.create', ['payment_point' => $payment_point->id, 'jenis_pkb' => $jenis->id ]) }}"><i
-                class="fa fa-plus fa-fw"></i>
-            Laporan {{ $jenis->nama }}</button>
-        @endforeach
+        <h6 class="m-0 font-weight-bold text-primary">SKPD Batal {{ $payment_point->nama }}</h6>
     </div>
     <div class="card-body">
         <form id="search-form" class="form-inline">
@@ -53,27 +43,17 @@
             <button type="submit" class="btn btn-primary"><i class="fa fa-filter fa-fw"></i> Filter</button>
         </form>
         <div class="table-responsive mt-3">
-            <table id="laporan_harianTable" class="table table-sm table-bordered table-hover" width="100%"
+            <table id="laporan_harian_skpd_batalTable" class="table table-sm table-bordered table-hover" width="100%"
                 cellspacing="0">
                 <thead>
                     <tr>
-                        <th rowspan="2"></th>
-                        <th rowspan="2" class="text-center">No.</th>
-                        <th rowspan="2" class="text-center">No. SKPD</th>
-                        <th rowspan="2" class="text-center">Jenis PKB</th>
-                        <th colspan="2" class="text-center">Tanggal</th>
-                        <th rowspan="2" class="text-center">No. Polisi</th>
-                        <th colspan="2" class="text-center">Jumlah</th>
-                        <th colspan="2" class="text-center">Wilayah</th>
-                        <th rowspan="2" class="text-center">E-Samsat</th>
-                    </tr>
-                    <tr>
-                        <th class="text-center">Cetak</th>
-                        <th class="text-center">Bayar</th>
-                        <th class="text-center">Pokok</th>
-                        <th class="text-center">Denda</th>
-                        <th class="text-center">Kota</th>
-                        <th class="text-center">Jenis Kasir</th>
+                        <th></th>
+                        <th class="text-center">No.</th>
+                        <th class="text-center">Tanggal Cetak</th>
+                        <th class="text-center">Jenis PKB</th>
+                        <th class="text-center">No. SKPD</th>
+                        <th class="text-center">No. Polisi</th>
+                        <th class="text-center">Keterangan</th>
                     </tr>
                 </thead>
             </table>
@@ -100,12 +80,12 @@
 
 @push('scripts')
 <script type="text/javascript">
-    var tableDokumen = $('#laporan_harianTable').DataTable({
+    var tableDokumen = $('#laporan_harian_skpd_batalTable').DataTable({
         responsive: true,
         processing: true,
         serverSide: true,
         ajax: {
-            url: '{!! route('laporan_harian.show', $payment_point->id) !!}',
+            url: '{!! route('laporan_harian_skpd_batal.show', $payment_point->id) !!}',
             data: function (d) {
                 d.bulan = $('select[name=bulan]').val();
                 d.tahun = $('select[name=tahun]').val();
@@ -114,16 +94,11 @@
         columns: [
             { data: 'action', name: 'action', className: 'text-nowrap text-center', width: '1%', orderable: false, searchable: false },
             { data: 'DT_RowIndex', name: 'DT_RowIndex', className: 'text-center', width: '1%' , searchable: false, orderable: false},
-            { data: 'no_skpd', name: 'no_skpd', className: 'text-center' },
-            { data: 'jenis_pkb.nama', name: 'jenis_pkb.nama', className: 'text-center' },
             { data: 'tgl_cetak', name: 'tgl_cetak', className: 'text-center' },
-            { data: 'tgl_bayar', name: 'tgl_bayar', className: 'text-center' },
+            { data: 'jenis_pkb.nama', name: 'jenis_pkb.nama', className: 'text-center' },
+            { data: 'no_skpd', name: 'no_skpd', className: 'text-center' },
             { data: 'no_pol_lengkap', name: 'no_pol_lengkap', className: 'text-center text-nowrap' },
-            { data: 'nilai_pokok', name: 'nilai_pokok', className: 'text-nowrap' },
-            { data: 'nilai_denda', name: 'nilai_denda', className: 'text-nowrap' },
-            { data: 'wilayah.nama', name: 'wilayah.nama' },
-            { data: 'kasir.nama', name: 'kasir.nama', className: 'text-center' },
-            { data: 'esamsat', name: 'esamsat', className: 'text-center' },
+            { data: 'keterangan', name: 'keterangan', className: 'text-center' },
         ],
     });
 
@@ -139,8 +114,8 @@
             var dataTargetTable = $(this).data('target-table');
     
             Swal.fire({
-                title: 'Anda yakin akan membatalkan data ini?',
-                text: "Periksa kembali data anda sebelum membatalkan SKPD ini!",
+                title: 'Anda yakin akan mengaktifkan lagi data ini?',
+                text: "Periksa kembali data anda sebelum mengaktifkan lagi SKPD ini!",
                 icon: 'warning',
                 showCancelButton: true,
                 allowEscapeKey: false,

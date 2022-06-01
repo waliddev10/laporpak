@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\LaporanBulananEsamsatController;
 use App\Http\Controllers\LaporanBulananPenerimaanController;
+use App\Http\Controllers\LaporanBulananSkpdBatalController;
 use App\Http\Controllers\LaporanBulananSkpdController;
 use App\Http\Controllers\LaporanHarianController;
+use App\Http\Controllers\LaporanHarianSkpdBatalController;
 use App\Http\Controllers\Pengaturan\JenisPkbController;
 use App\Http\Controllers\Pengaturan\KasirController;
 use App\Http\Controllers\Pengaturan\KasirPembayaranController;
@@ -73,6 +75,17 @@ Route::middleware(['auth'])->group(function () {
             ->name('laporan_harian.destroy');
     });
 
+    Route::prefix('/laporan_harian_skpd_batal')->group(function () {
+        Route::get('/', [LaporanHarianSkpdBatalController::class, 'index'])
+            ->name('laporan_harian_skpd_batal.index');
+        Route::get('/payment_point/{payment_point}', [LaporanHarianSkpdBatalController::class, 'show'])
+            ->name('laporan_harian_skpd_batal.show');
+        Route::get('/payment_point/{payment_point}/{esamsat}', [LaporanHarianSkpdBatalController::class, 'edit'])
+            ->name('laporan_harian_skpd_batal.edit');
+        Route::put('/payment_point/{payment_point}/{esamsat}', [LaporanHarianSkpdBatalController::class, 'update'])
+            ->name('laporan_harian_skpd_batal.update');
+    });
+
     Route::prefix('/laporan_bulanan_esamsat')->group(function () {
         Route::get('/', [LaporanBulananEsamsatController::class, 'index'])
             ->name('laporan_bulanan_esamsat.index');
@@ -95,7 +108,14 @@ Route::middleware(['auth'])->group(function () {
             ->name('laporan_bulanan_skpd.print');
     });
 
-    Route::prefix('/pengaturan')->group(function () {
+    Route::prefix('/laporan_bulanan_skpd_batal')->group(function () {
+        Route::get('/', [LaporanBulananSkpdBatalController::class, 'index'])
+            ->name('laporan_bulanan_skpd_batal.index');
+        Route::post('/print', [LaporanBulananSkpdBatalController::class, 'print'])
+            ->name('laporan_bulanan_skpd_batal.print');
+    });
+
+    Route::prefix('/pengaturan')->middleware('role:admin')->group(function () {
         Route::resource('/jenis_pkb', JenisPkbController::class)->except('show');
         Route::resource('/wilayah', WilayahController::class)->except('show');
         Route::resource('/kasir', KasirController::class)->except('show');

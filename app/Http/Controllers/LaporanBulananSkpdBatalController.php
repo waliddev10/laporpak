@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Esamsat;
+use App\Models\Kasir;
 use App\Models\KotaPenandatangan;
 use App\Models\PaymentPoint;
 use App\Models\Penandatangan;
+use App\Models\Wilayah;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
-class LaporanBulananEsamsatController extends Controller
+class LaporanBulananSkpdBatalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +21,12 @@ class LaporanBulananEsamsatController extends Controller
      */
     public function index(Request $request)
     {
-        return view('pages.laporan_bulanan.esamsat.index', [
+        return view('pages.laporan_bulanan.skpd_batal.index', [
             'penandatangan' => Penandatangan::orderBy('nama', 'asc')->get(),
             'kota_penandatangan' => KotaPenandatangan::orderBy('nama', 'asc')->get(),
-            'payment_point' => PaymentPoint::orderBy('nama', 'asc')->get()
+            'payment_point' => PaymentPoint::orderBy('nama', 'asc')->get(),
+            'kasir' => Kasir::orderBy('nama', 'asc')->get(),
+            'wilayah' => Wilayah::orderBy('nama', 'asc')->get(),
         ]);
     }
 
@@ -32,15 +36,14 @@ class LaporanBulananEsamsatController extends Controller
             'payment_point_id' => 'required',
             'bulan' => 'required',
             'tahun' => 'required',
+            'no_surat' => 'required',
             'penandatangan1_id' => 'required',
             'penandatangan2_id' => 'required',
+            'penandatangan3_id' => 'required',
             'tgl_ttd' => 'required|date',
-            'kota_penandatangan_id' => 'required',
         ]);
 
-        $data = Esamsat::with(['kasir_pembayaran'])
-            ->where('status_esamsat', true)
-            ->where('status_batal', true)
+        $esamsat_data = Esamsat::with(['kasir_pembayaran'])
             ->when($request->payment_point_id, function ($query) use ($request) {
                 return $query->where('payment_point_id', $request->payment_point_id);
             })
@@ -53,17 +56,18 @@ class LaporanBulananEsamsatController extends Controller
             ->orderBy('tgl_cetak', 'asc')
             ->get();
 
-        $pdf = PDF::loadView('pdf.laporan_bulanan.esamsat', [
-            'data' => $data,
+        $pdf = PDF::loadView('pdf.laporan_bulanan.skpd_batal', [
+            'data' => $esamsat_data,
             'bulan' => $request->bulan,
             'tahun' => $request->tahun,
+            'no_surat' => $request->no_surat,
             'payment_point' => PaymentPoint::findOrFail($request->payment_point_id),
             'penandatangan1' => Penandatangan::findOrFail($request->penandatangan1_id),
             'penandatangan2' => Penandatangan::findOrFail($request->penandatangan2_id),
+            'penandatangan3' => Penandatangan::findOrFail($request->penandatangan3_id),
             'tgl_ttd' => $request->tgl_ttd,
-            'kota_penandatangan' => KotaPenandatangan::findOrFail($request->kota_penandatangan_id),
         ]);
-        $pdf->setPaper('legal', 'landscape');
-        return $pdf->stream('laporan_bulanan_esamsat.pdf');
+        $pdf->setPaper('legal', 'potrait');
+        return $pdf->stream('laporan_bulanan_skpd_batal.pdf');
     }
 }

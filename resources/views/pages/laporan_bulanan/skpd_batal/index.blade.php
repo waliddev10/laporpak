@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Laporan SKPD Bulanan')
+@section('title', 'Laporan SKPD Batal Bulanan')
 
 @section('content')
 <div class="card shadow">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Laporan SKPD Bulanan</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Laporan SKPD Batal Bulanan</h6>
     </div>
     <div class="card-body">
-        <form method="POST" action="{{ route('laporan_bulanan_skpd.print') }}" accept-charset="UTF-8"
+        <form method="POST" action="{{ route('laporan_bulanan_skpd_batal.print') }}" accept-charset="UTF-8"
             class="form needs-validation" autocomplete="off">
             @csrf
             <div class="border p-3 my-2 shadow">
@@ -59,26 +59,6 @@
                                     @endwhile
                             </select>
                             @error('bulan')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="font-weight-semibold">Tanggal Mulai</label>
-                            <input type="date" name="tgl_mulai" class="form-control" value={{ old('tgl_mulai') }}>
-                            @error('tgl_mulai')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="font-weight-semibold">Tanggal Selesai</label>
-                            <input type="date" name="tgl_selesai" class="form-control" value={{ old('tgl_selesai') }}>
-                            @error('tgl_selesai')
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>

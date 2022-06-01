@@ -23,6 +23,7 @@ class Esamsat extends Model
         'kasir_id',
         'status_esamsat',
         'kasir_pembayaran_id',
+        'status_batal',
     ];
 
     public function jenis_pkb()

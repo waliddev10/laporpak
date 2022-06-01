@@ -43,7 +43,7 @@
     </table>
 
     <div style="margin-top: 1.25cm; margin-bottom: 1cm; text-align: center;">
-        <h3 style="margin: 0 0 0.2cm 0;">BERITA ACARA PENGGUNAAN SKKP</h3>
+        <h3 style="margin: 0 0 0.2cm 0;">BERITA ACARA SKKP BATAL</h3>
         <span>Nomor: 970/{{ $no_surat }}/PPRD.PPU.02/{{
             \Terbilang::roman(\Carbon\Carbon::parse($tgl_ttd)->format('m')) }}/2022</span>
     </div>
@@ -83,55 +83,24 @@
         </table>
     </div>
 
-    <p style="text-align: justify; line-height: 14pt;">Secara bersama-sama melakukan pemeriksaan
-        pengeluaran/penggunaan Surat Ketetapan Kewajiban Pembayaran (SKKP) tanggal {{
-        \Carbon\Carbon::parse($tgl_mulai)->isoFormat('D') }} s.d. {{
-        \Carbon\Carbon::parse($tgl_selesai)->isoFormat('D MMMM Y') }}, dengan
-        perincian sebagai berikut :</p>
+    <p style="text-align: justify; line-height: 14pt;">Menyatakan bahwa SKKP yang rusak/batal :</p>
 
     <table class="table" style="font-size: 9pt; width: 100%; border-collapse: collapse; margin: 0 0 10pt 0;">
         <tr style="border-bottom: 4px solid black; border-bottom-style: double;">
             <th style="border: 0.5pt solid black; width: 5%;">NO.</th>
             <th style="border: 0.5pt solid black; width: 25%;">TANGGAL</th>
-            <th style="border: 0.5pt solid black; width: 50%;">PENGGUNAAN SKKP</th>
-            <th style="border: 0.5pt solid black; width: 20%;">JUMLAH</th>
+            <th style="border: 0.5pt solid black; width: 25%;">NO. SKKP</th>
+            <th style="border: 0.5pt solid black; width: 50%;">KETERANGAN</th>
         </tr>
-        @php
-        $jumlah_no_skpd = 0;
-        @endphp
-        @foreach ($data as $key => $d)
+        @foreach ($data as $d)
         <tr>
             <td style="border: 0.5pt solid black; text-align: center;">{{ $loop->iteration }}</td>
             <td style="border: 0.5pt solid black; text-align: center;">{{
-                \Carbon\Carbon::parse($key)->isoFormat('D MMMM Y') }}</td>
-            <td style="border: 0.5pt solid black; text-align: center;">
-                <table style="width: 100%; padding: 0; margin: 0;">
-                    @php
-                    $pemakaian_no_skpd = collect($d)->sortBy([
-                    fn ($a, $b) => $a->no_skpd <=> $b->no_skpd
-                        ]);
-                        @endphp
-                        <tr style="padding: 0; margin: 0;">
-                            <td style="padding: 0; margin: 0; text-align: center;">{{
-                                $pemakaian_no_skpd->first()->no_skpd
-                                }}</td>
-                            <td style="padding: 0; margin: 0; text-align: center;">s.d.</td>
-                            <td style="padding: 0; margin: 0; text-align: center;">{{
-                                $pemakaian_no_skpd->last()->no_skpd
-                                }}</td>
-                        </tr>
-                </table>
-            </td>
-            <td style="border: 0.5pt solid black; text-align: center;">{{ count($d) }}</td>
+                \Carbon\Carbon::parse($d->tgl_cetak)->isoFormat('D MMMM Y') }}</td>
+            <td style="border: 0.5pt solid black; text-align: center;">{{ $d->no_skpd }}</td>
+            <td style="border: 0.5pt solid black; text-align: center;">{{ $d->keterangan }}</td>
         </tr>
-        @php
-        $jumlah_no_skpd = $jumlah_no_skpd + count($d);
-        @endphp
         @endforeach
-        <tr>
-            <th colspan="3" style="border: 0.5pt solid black; text-align: center;">JUMLAH</th>
-            <th style="border: 0.5pt solid black; text-align: center;">{{ $jumlah_no_skpd }}</th>
-        </tr>
     </table>
 
     <p style="text-indent: 1cm; text-align: justify; line-height: 14pt;">Demikian Berita Acara ini dibuat dan

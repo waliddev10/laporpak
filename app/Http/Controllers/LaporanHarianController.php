@@ -116,6 +116,7 @@ class LaporanHarianController extends Controller
     public function show(PaymentPoint $payment_point, Request $request)
     {
         $esamsats = Esamsat::with(['jenis_pkb', 'wilayah', 'kasir', 'kasir_pembayaran'])
+            ->where('status_batal', false)
             ->where('payment_point_id', $payment_point->id)
             ->orderBy('tgl_cetak', 'desc')
             ->when($request->has('bulan') && $request->bulan != 'Semua', function ($query) use ($request) {
@@ -129,7 +130,12 @@ class LaporanHarianController extends Controller
         if ($request->ajax()) {
             return DataTables::of($esamsats)
                 ->addColumn('action', function ($item) use ($payment_point) {
-                    return '<div class="btn-group"><button class="btn btn-xs btn-warning" title="Ubah" data-toggle="modal" data-target="#modalContainer" data-title="Ubah" href="' .  route('laporan_harian.edit', ['payment_point' => $payment_point->id, 'esamsat' => $item->id]) . '"><i class="fas fa-edit fa-fw"></i></button><button href="' . route('laporan_harian.destroy', ['payment_point' => $payment_point->id, 'esamsat' => $item->id]) . '" class="btn btn-xs btn-danger delete" data-target-table="tableDokumen"><i class="fa fa-trash"></i></button>
+                    return '<div class="btn-group">
+                    <button title="Ubah Data" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#modalContainer" data-title="Ubah" href="' .  route('laporan_harian.edit', ['payment_point' => $payment_point->id, 'esamsat' => $item->id]) . '"><i class="fas fa-edit fa-fw"></i></button>
+                    
+                    <button title="Hapus Data" href="' . route('laporan_harian.destroy', ['payment_point' => $payment_point->id, 'esamsat' => $item->id]) . '" class="btn btn-xs btn-danger delete" data-target-table="tableDokumen"><i class="fa fa-trash"></i></button>
+
+                    <button title="Batalkan SKPD" class="btn btn-xs btn-secondary" data-toggle="modal" data-target="#modalContainer" data-title="Batalkan SKPD" href="' .  route('laporan_harian_skpd_batal.edit', ['payment_point' => $payment_point->id, 'esamsat' => $item->id]) . '"><i class="fa fa-ban"></i></button>
                     </div>';
                 })
                 ->addColumn('no_pol_lengkap', function ($item) {
