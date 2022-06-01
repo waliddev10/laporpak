@@ -44,6 +44,7 @@ class LaporanBulananSkpdBatalController extends Controller
         ]);
 
         $esamsat_data = Esamsat::with(['kasir_pembayaran'])
+            ->where('status_batal', true)
             ->when($request->payment_point_id, function ($query) use ($request) {
                 return $query->where('payment_point_id', $request->payment_point_id);
             })
