@@ -15,7 +15,7 @@
     .table tr,
     .table th,
     .table td {
-        padding: 5pt;
+        padding: 2pt;
     }
 </style>
 
@@ -33,7 +33,7 @@
     <h3 style="font-size: 10pt; margin: 0 0 20pt 0;">BULAN {{
         Str::upper(\Carbon\Carbon::create()->month($bulan)->monthName) }} {{ $tahun }}</h3>
 
-    <table class="table" style="font-size: 9pt; width: 100%; border-collapse: collapse; margin: 0 0 20pt 0;">
+    <table class="table" style="font-size: 8pt; width: 100%; border-collapse: collapse; margin: 0 0 15pt 0;">
         <thead style="border-bottom: 4px solid black; border-bottom-style: double;">
             <tr>
                 <th rowspan="3" style="border: 0.5pt solid black; width: 4%;">NO.</th>
