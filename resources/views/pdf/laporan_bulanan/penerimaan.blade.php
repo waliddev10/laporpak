@@ -1,6 +1,6 @@
 <style>
     @page {
-        margin: 2cm;
+        margin: 1cm 1.5cm;
     }
 
     body {
@@ -182,7 +182,7 @@
         <tr>
             <td style="width: 30%;">
                 <div style="text-align: center;">
-                    <div style="font-size: 9pt; margin: 10pt 0 35pt;">{{ $penandatangan1->jabatan }}</div>
+                    <div style="font-size: 9pt; margin: 10pt 0 25pt;">{{ $penandatangan1->jabatan }}</div>
 
                     <h4 style="font-size: 9pt; margin: 0 0 3pt 0; text-decoration: underline;">{{ $penandatangan1->nama
                         }}</h4>
@@ -197,7 +197,7 @@
                     <span style="font-size: 9pt;">{{ $kota_penandatangan->nama }}, {{
                         \Carbon\Carbon::parse($tgl_ttd)->isoFormat('D MMMM Y') }}</span>
 
-                    <div style="font-size: 9pt; margin: 3pt 0 35pt;">{{ $penandatangan2->jabatan }}</div>
+                    <div style="font-size: 9pt; margin: 3pt 0 25pt;">{{ $penandatangan2->jabatan }}</div>
 
                     <h4 style="font-size: 9pt; margin: 0 0 3pt 0; text-decoration: underline;">{{
                         $penandatangan2->nama }}</h4>

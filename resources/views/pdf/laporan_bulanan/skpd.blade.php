@@ -18,7 +18,7 @@
     .table tr,
     .table th,
     .table td {
-        padding: 5pt;
+        padding: 2pt;
     }
 </style>
 
@@ -42,13 +42,13 @@
         </thead>
     </table>
 
-    <div style="margin-top: 1.25cm; margin-bottom: 1cm; text-align: center;">
-        <h3 style="margin: 0 0 0.2cm 0;">BERITA ACARA PENGGUNAAN SKKP</h3>
+    <div style="margin-top: 1cm; margin-bottom: 0.65cm; text-align: center;">
+        <h3 style="margin: 0 0 5pt 0;">BERITA ACARA PENGGUNAAN SKKP</h3>
         <span>Nomor: 970/{{ $no_surat }}/PPRD.PPU.02/{{
             \Terbilang::roman(\Carbon\Carbon::parse($tgl_ttd)->format('m')) }}/2022</span>
     </div>
 
-    <p style="text-indent: 1cm; text-align: justify; line-height: 14pt;">Pada hari ini {{
+    <p style="text-indent: 1cm; text-align: justify; line-height: 13pt;  margin: 0 0 10pt 0;">Pada hari ini {{
         \Carbon\Carbon::parse($tgl_ttd)->dayName }} tanggal
         {{
         ucwords(\Terbilang::make(\Carbon\Carbon::parse($tgl_ttd)->format('d'))) }} Bulan {{
@@ -57,8 +57,8 @@
         bertanda tangan dibawah ini :
     </p>
 
-    <div style="margin-left: 2cm; line-height: 14pt;">
-        <table style="width: 100%; margin-top: 0; margin-bottom: 0;">
+    <div style="margin-left: 1.5cm; line-height: 13pt;">
+        <table style="width: 100%; margin-top: 0; margin-bottom: 0; padding: 0 !important;">
             <tr>
                 <td style="width: 0.5cm;">1.</td>
                 <td style="width: 40%;">{{ $penandatangan3->nama }}</td>
@@ -83,7 +83,7 @@
         </table>
     </div>
 
-    <p style="text-align: justify; line-height: 14pt;">Secara bersama-sama melakukan pemeriksaan
+    <p style="text-align: justify; line-height: 13pt; margin: 0 0 10pt 0;">Secara bersama-sama melakukan pemeriksaan
         pengeluaran/penggunaan Surat Ketetapan Kewajiban Pembayaran (SKKP) tanggal {{
         \Carbon\Carbon::parse($tgl_mulai)->isoFormat('D') }} s.d. {{
         \Carbon\Carbon::parse($tgl_selesai)->isoFormat('D MMMM Y') }}, dengan
@@ -134,14 +134,14 @@
         </tr>
     </table>
 
-    <p style="text-indent: 1cm; text-align: justify; line-height: 14pt;">Demikian Berita Acara ini dibuat dan
+    <p style="text-indent: 1cm; text-align: justify; line-height: 13pt;">Demikian Berita Acara ini dibuat dan
         ditandatangani bersama untuk dipergunakan sebagaimana mestinya.</p>
 
     <table style="width: 100%; border-collapse: collapse;">
         <tr>
             <td style="width: 35%;">
                 <div style="text-align: center;">
-                    <div style="margin: 10pt 0 40pt;">{{ $penandatangan1->jabatan }}</div>
+                    <div style="margin: 10pt 0 25pt;">{{ $penandatangan1->jabatan }}</div>
 
                     <h4 style="margin: 0 0 3pt 0; text-decoration: underline;">{{ $penandatangan1->nama }}</h4>
                     <h5 style="font-weight: normal; margin: 0;">NIP. {{ $penandatangan1->nip }}
@@ -152,7 +152,7 @@
             </td>
             <td style="width: 35%;">
                 <div style="text-align: center;">
-                    <div style="margin: 10pt 0 40pt;">{{ $penandatangan2->jabatan }}</div>
+                    <div style="margin: 10pt 0 25pt;">{{ $penandatangan2->jabatan }}</div>
 
                     <h4 style="margin: 0 0 3pt 0; text-decoration: underline;">{{ $penandatangan2->nama }}</h4>
                     <h5 style="font-weight: normal; margin: 0;">NIP. {{ $penandatangan2->nip }}</h5>
@@ -163,7 +163,7 @@
             <td colspan="3">
                 <div style="text-align: center;">
                     <span>Mengetahui,</span>
-                    <div style="margin: 5pt 0 40pt;">{{ $penandatangan3->jabatan }}</div>
+                    <div style="margin: 2pt 0 25pt;">{{ $penandatangan3->jabatan }}</div>
 
                     <h4 style="margin: 0 0 3pt 0; text-decoration: underline;">{{ $penandatangan3->nama }}</h4>
                     <h5 style="font-weight: normal; margin: 0;">NIP. {{ $penandatangan3->nip }}</h5>

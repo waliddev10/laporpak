@@ -1,6 +1,6 @@
 <style>
     @page {
-        margin: 2cm;
+        margin: 1cm 1.5cm;
     }
 
     body {
@@ -15,18 +15,18 @@
     .table tr,
     .table th,
     .table td {
-        padding: 5pt;
+        padding: 2pt;
     }
 </style>
 
 <body>
 
-    <h3 style="font-size: 12pt; text-align: center; margin: 0;">UPTD PPRD WILAYAH KAB. PENAJAM PASER UTARA</h3>
-    <h3 style="font-size: 12pt; text-align: center; margin: 0;">SAMSAT {{ Str::upper($payment_point->nama) }}</h3>
-    <h3 style="font-size: 12pt; text-align: center; margin: 0 0 20pt 0;">BULAN {{
+    <h3 style="font-size: 11pt; text-align: center; margin: 0;">UPTD PPRD WILAYAH KAB. PENAJAM PASER UTARA</h3>
+    <h3 style="font-size: 11pt; text-align: center; margin: 0;">SAMSAT {{ Str::upper($payment_point->nama) }}</h3>
+    <h3 style="font-size: 11pt; text-align: center; margin: 0 0 20pt 0;">BULAN {{
         Str::upper(\Carbon\Carbon::create()->month($bulan)->monthName) }} {{ $tahun }}</h3>
 
-    <table class="table" style="font-size: 10pt; width: 100%; border-collapse: collapse; margin: 0 0 20pt 0;">
+    <table class="table" style="font-size: 9pt; width: 100%; border-collapse: collapse; margin: 0 0 20pt 0;">
         <tr style="border-bottom: 4px solid black; border-bottom-style: double;">
             <th style="border: 0.5pt solid black; width: 4%;">NO.</th>
             <th style="border: 0.5pt solid black; width: 12%;">TANGGAL CETAK<br />SKPD</th>
@@ -78,7 +78,7 @@
         <tr>
             <td style="width: 30%;">
                 <div style="text-align: center;">
-                    <div style="font-size: 10pt; margin: 10pt 0 60pt;">{{ $penandatangan1->jabatan }}</div>
+                    <div style="font-size: 10pt; margin: 10pt 0 25pt;">{{ $penandatangan1->jabatan }}</div>
 
                     <h4 style="font-size: 10pt; margin: 0 0 3pt 0; text-decoration: underline;">{{ $penandatangan1->nama
                         }}</h4>
@@ -93,7 +93,7 @@
                     <span>{{ $kota_penandatangan->nama }}, {{
                         \Carbon\Carbon::parse($tgl_ttd)->isoFormat('D MMMM Y') }}</span>
 
-                    <div style="font-size: 10pt; margin: 10pt 0 60pt;">{{ $penandatangan2->jabatan }}</div>
+                    <div style="font-size: 10pt; margin: 2pt 0 25pt;">{{ $penandatangan2->jabatan }}</div>
 
                     <h4 style="font-size: 10pt; margin: 0 0 3pt 0; text-decoration: underline;">{{
                         $penandatangan2->nama }}</h4>
