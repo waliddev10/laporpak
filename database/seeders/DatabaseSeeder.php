@@ -1,13 +1,13 @@
 <?php
 
-use Database\Seeders\JenisPkbSeeder;
-use Database\Seeders\KasirPembayaranSeeder;
-use Database\Seeders\KasirSeeder;
-use Database\Seeders\KotaPenandatanganSeeder;
-use Database\Seeders\PaymentPointSeeder;
+use Database\Seeders\BidangSeeder;
+use Database\Seeders\JabatanTimSeeder;
+use Database\Seeders\JenisPenugasanSeeder;
+use Database\Seeders\KategoriPenugasanSeeder;
+use Database\Seeders\PangkatSeeder;
+use Database\Seeders\SkpdSeeder;
+use Database\Seeders\TanggalLiburSeeder;
 use Database\Seeders\UsersSeeder;
-use Database\Seeders\PenandatanganSeeder;
-use Database\Seeders\WilayahSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,13 +19,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(BidangSeeder::class);
+        $this->call(PangkatSeeder::class);
         $this->call(UsersSeeder::class);
-        $this->call(KotaPenandatanganSeeder::class);
-        $this->call(PenandatanganSeeder::class);
-        $this->call(PaymentPointSeeder::class);
-        $this->call(WilayahSeeder::class);
-        $this->call(JenisPkbSeeder::class);
-        $this->call(KasirPembayaranSeeder::class);
-        $this->call(KasirSeeder::class);
+        $this->call(JenisPenugasanSeeder::class);
+        $this->call(KategoriPenugasanSeeder::class);
+        $this->call(SkpdSeeder::class);
+        $this->call(JabatanTimSeeder::class);
+        $this->call(TanggalLiburSeeder::class);
     }
 }

@@ -12,26 +12,59 @@
         @yield('title') - {{ config('app.name') }}
         @else {{ config('app.name') }} @endif</title>
 
-    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css" />
-    <link
-        href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet" />
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href=" {{ asset('assets/css/font-awesome.css') }}">
+    <!-- ico-font-->
+    <link rel="stylesheet" type="text/css" href=" {{ asset('assets/css/vendors/icofont.css') }}">
+    <!-- Themify icon-->
+    <link rel="stylesheet" type="text/css" href=" {{ asset('assets/css/vendors/themify.css') }}">
+    <!-- Flag icon-->
+    <link rel="stylesheet" type="text/css" href=" {{ asset('assets/css/vendors/flag-icon.css') }}">
+    <!-- Feather icon-->
+    <link rel="stylesheet" type="text/css" href=" {{ asset('assets/css/vendors/feather-icon.css') }}">
+    <!-- Plugins css start-->
+    <!-- Plugins css Ends-->
+    <!-- Bootstrap css-->
+    <link rel="stylesheet" type="text/css" href=" {{ asset('assets/css/vendors/bootstrap.css') }}">
+    <!-- App css-->
+    <link rel="stylesheet" type="text/css" href=" {{ asset('assets/css/style.css') }}">
+    {{--
+    <link id="color" rel="stylesheet" href=" {{ asset('assets/css/color-1.css" media="screen') }}"> --}}
+    <!-- Responsive css-->
+    <link rel="stylesheet" type="text/css" href=" {{ asset('assets/css/responsive.css') }}">
+</head>
 </head>
 
 <body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body px-4 py-5">
-                        <div class="row">
-                            @yield('content')
-                        </div>
-                    </div>
+    <!-- login page start-->
+    <div class="container-fluid p-0">
+        <div class="row m-0">
+            <div class="col-12 p-0">
+                <div class="login-card">
+                    @yield('content')
                 </div>
             </div>
         </div>
+        <!-- latest jquery-->
+        <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
+        <!-- Bootstrap js-->
+        <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+        <!-- feather icon js-->
+        <script src="{{ asset('assets/js/icons/feather-icon/feather.min.js') }}"></script>
+        <script src="{{ asset('assets/js/icons/feather-icon/feather-icon.js') }}"></script>
+        <!-- scrollbar js-->
+        <!-- Sidebar jquery-->
+        <script src="{{ asset('assets/js/config.js') }}"></script>
+        <!-- Plugins JS start-->
+        <!-- Plugins JS Ends-->
+        <!-- Theme js-->
+        <script src="{{ asset('assets/js/script.js') }}"></script>
+        <!-- login js-->
+        <!-- Plugin used-->
     </div>
 </body>
 

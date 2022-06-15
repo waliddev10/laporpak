@@ -9,46 +9,106 @@
     <meta name="author" content="{{ config('app.author') }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>@hasSection('title') @yield('title') - {{ config('app.name') }} @else {{ config('app.name') }} @endif</title>
-    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css" />
-    <link
-        href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet" />
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
-    {{--
-    <link href="{{ asset('assets/css/sb-admin-2.css').'?v='.Str::random(5) }}" rel="stylesheet"> --}}
 
-    <link href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.css') }}">
+    <!-- ico-font-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/icofont.css') }}">
+    <!-- Themify icon-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/themify.css') }}">
+    <!-- Flag icon-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/flag-icon.css') }}">
+    <!-- Feather icon-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/feather-icon.css') }}">
+    <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/scrollbar.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/chartist.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/date-picker.css') }}">
+    <!-- Plugins css Ends-->
+    <!-- Bootstrap css-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css') }}">
+    <!-- App css-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
 
     @stack('styles')
 
 </head>
 
-<body id="page-top">
-    <div id="wrapper">
-        @include('partials.sidebar')
-        <div id="content-wrapper" class="d-flex flex-column">
-            <div id="content">
-                @include('partials.navbar')
-                <div class="container-fluid p-0">
+<body>
+    @include('components.loader')
+
+    <div class="tap-top">
+        <i data-feather="chevrons-up"></i>
+    </div>
+
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+
+        @include('components.navbar')
+
+        <div class="page-body-wrapper">
+
+            @include('components.sidebar')
+
+            <div class="page-body">
+                @hasSection('title')
+                @include('components.breadcrumb')
+                @endif
+
+                <div class="container-fluid">
+                    @hasSection('content')
                     @yield('content')
+                    @endif
                 </div>
+
             </div>
-            @include('partials.footer')
+
+            @include('components.footer')
         </div>
     </div>
-    @include('components.scroll-to-top')
 
-    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-    <script src="{{ asset('assets/js/sb-admin-2.js') }}"></script>
-    {{-- <script src="{{ asset('assets/js/sb-admin-2.js').'?v='.Str::random(5) }}"></script> --}}
-
-    <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- latest jquery-->
+    <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
+    <!-- Bootstrap js-->
+    <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+    <!-- feather icon js-->
+    <script src="{{ asset('assets/js/icons/feather-icon/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/icons/feather-icon/feather-icon.js') }}"></script>
+    <!-- scrollbar js-->
+    <script src="{{ asset('assets/js/scrollbar/simplebar.js') }}"></script>
+    <script src="{{ asset('assets/js/scrollbar/custom.js') }}"></script>
+    <!-- Sidebar jquery-->
+    <script src="{{ asset('assets/js/config.js') }}"></script>
+    <!-- Plugins JS start-->
+    <script src="{{ asset('assets/js/sidebar-menu.js') }}"></script>
+    <script src="{{ asset('assets/js/chart/chartist/chartist.js') }}"></script>
+    <script src="{{ asset('assets/js/chart/chartist/chartist-plugin-tooltip.js') }}"></script>
+    <script src="{{ asset('assets/js/chart/knob/knob.min.js') }}"></script>
+    <script src="{{ asset('assets/js/chart/knob/knob-chart.js') }}"></script>
+    <script src="{{ asset('assets/js/chart/apex-chart/apex-chart.js') }}"></script>
+    <script src="{{ asset('assets/js/chart/apex-chart/stock-prices.js') }}"></script>
+    <script src="{{ asset('assets/js/notify/bootstrap-notify.min.js') }}"></script>
+    <script src="{{ asset('assets/js/dashboard/default.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/notify/index.js') }}"></script> --}}
+    <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
+    <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.en.js') }}"></script>
+    <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
+    <script src="{{ asset('assets/js/typeahead/handlebars.js') }}"></script>
+    <script src="{{ asset('assets/js/typeahead/typeahead.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/typeahead/typeahead.custom.js') }}"></script>
+    <script src="{{ asset('assets/js/typeahead-search/handlebars.js') }}"></script>
+    <script src="{{ asset('assets/js/typeahead-search/typeahead-custom.js') }}"></script>
+    <!-- Plugins JS Ends-->
+    <!-- Theme js-->
+    <script src="{{ asset('assets/js/script.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/theme-customizer/customizer.js') }}"></script> --}}
+    <!-- login js-->
+    <!-- Plugin used-->
 
     <script type="text/javascript">
         $.ajaxSetup({
@@ -89,21 +149,34 @@
             });
         }
     </script>
+    <script>
+        $(document).ajaxStart(function () {
+            $("button").attr("disabled", "disabled");
+            $("input").attr("disabled", "disabled");
+            $("select").attr("disabled", "disabled");
+            $("textarea").attr("disabled", "disabled");
+        }).ajaxComplete(function(){
+            $("button").removeAttr("disabled");
+            $("input").removeAttr("disabled");
+            $("select").removeAttr("disabled");
+            $("textarea").removeAttr("disabled");
+        });
+    </script>
     <script type="text/javascript">
         // Global Settings DataTables Search
         $(document).on('init.dt', function (e, settings) {
             var api = new $.fn.dataTable.Api(settings);
             var inputs = $(settings.nTable).closest('.dataTables_wrapper').find('.dataTables_filter input');
-    
+
             inputs.unbind();
             inputs.each(function (e) {
                 var input = this;
-    
+
                 function disableSubmitOnEnter(form) {
                     if (form.length) {
                         form.on('keyup keypress', function (e) {
                             var keyCode = e.keyCode || e.which;
-    
+
                             if (keyCode == 13) {
                                 e.preventDefault();
                                 return false;
@@ -112,13 +185,13 @@
                     }
                 }
                 disableSubmitOnEnter($(input).closest('form'));
-    
+
                 $(input).bind('keyup', function (e) {
                     if (e.keyCode == 13) {
                         api.search(this.value).draw();
                     }
                 });
-    
+
                 $(input).bind('input', function (e) {
                     if (this.value == '') {
                         api.search(this.value).draw();
@@ -126,11 +199,11 @@
                 });
             });
         });
-    
+
         function setLoader() {
             return '<div class="d-flex justify-content-center"><div class="spinner-border text-primary" role="status"></div></div>';
         }
-    
+
         $('#modalContainer').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)
             var modal = $(this)
@@ -142,7 +215,7 @@
                 modal.find('.modal-body').html(data)
             });
         });
-    
+
         function showAlert(message, type = 'success', reload = false) {
             if (type == 'success') {
                 Swal.fire({
@@ -156,7 +229,7 @@
                 if (type == 'danger') {
                     type = 'error';
                 }
-    
+
                 Swal.fire({
                     title: type.toUpperCase()+'!',
                     html: message,
@@ -177,7 +250,7 @@
             event.preventDefault();
             var href = $(this).attr("href");
             var dataTargetTable = $(this).data('target-table');
-    
+
             Swal.fire({
                 title: 'Anda yakin akan menghapus data ini?',
                 text: "Periksa kembali data anda sebelum menghapus!",
@@ -208,5 +281,19 @@
 
     @stack('scripts')
 </body>
+
+{{-- <div id="wrapper">
+    @include('partials.sidebar')
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            @include('partials.navbar')
+            <div class="container-fluid p-0">
+                @yield('content')
+            </div>
+        </div>
+        @include('partials.footer')
+    </div>
+</div>
+@include('components.scroll-to-top') --}}
 
 </html>

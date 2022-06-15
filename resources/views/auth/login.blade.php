@@ -1,7 +1,51 @@
 @extends('layouts.guest')
 
 @section('content')
-<div class="col-12">
+<div>
+    <div>
+        <a class="logo">
+            <img class="img-fluid for-light" src="{{ asset('assets/images/logo/logo.png') }}" alt="looginpage">
+            <img class="img-fluid for-dark" src="{{ asset('assets/images/logo/logo_dark.png') }}" alt="looginpage">
+        </a>
+    </div>
+    <div class="login-main">
+        <form method="POST" action="{{ route('login') }}" class="theme-form">
+            @csrf
+            <h4>Masuk Akun</h4>
+            <p>Silakan masukkan NIP dan password untuk login</p>
+            <div class="form-group">
+                <label class="col-form-label">NIP</label>
+                <input autofocus required type="number" name="nip" class="form-control" placeholder="NIP"
+                    value="{{ old('nip') }}" />
+                @error('nip')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label class="col-form-label">Password</label>
+                <div class="form-input position-relative">
+                    <input required type="password" name="password" class="form-control" placeholder="Password" />
+                    @error('password')
+                    <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                    <div class="show-hide"><span class="show"> </span></div>
+                </div>
+            </div>
+            <div class="form-group mb-0">
+                <div class="checkbox p-0">
+                    <input id="checkbox1" type="checkbox" name="remember">
+                    <label class="text-muted" for="checkbox1">Ingat saya</label>
+                </div>
+                <div class="text-end mt-3">
+                    <button class="btn btn-primary btn-block w-100" type="submit">Masuk</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection
+
+{{-- <div class="col-12">
     <div class="text-lg text-center mb-3">
         <img class="mx-auto d-block rotate-n-15" src={{ asset('assets/img/logo.png') }} height="84" />
     </div>
@@ -26,47 +70,4 @@
             Login
         </button>
     </form>
-</div>
-@endsection
-
-{{-- <form method="POST" action="{{ route('login') }}">
-    @csrf
-
-    <!-- Email Address -->
-    <div>
-        <label for="email" :value="__('Email')" />
-
-        <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
-            autofocus />
-    </div>
-
-    <!-- Password -->
-    <div class="mt-4">
-        <label for="password" :value="__('Password')" />
-
-        <input id="password" class="block mt-1 w-full" type="password" name="password" required
-            autocomplete="current-password" />
-    </div>
-
-    <!-- Remember Me -->
-    <div class="block mt-4">
-        <label for="remember_me" class="inline-flex items-center">
-            <input id="remember_me" type="checkbox"
-                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                name="remember">
-            <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-        </label>
-    </div>
-
-    <div class="flex items-center justify-end mt-4">
-        @if (Route::has('password.request'))
-        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-            {{ __('Forgot your password?') }}
-        </a>
-        @endif
-
-        <button type="submit" class="ml-3">
-            {{ __('Log in') }}
-        </button>
-    </div>
-</form> --}}
+</div> --}}
